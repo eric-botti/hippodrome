@@ -7,10 +7,10 @@ from pydantic import Field, ConfigDict
 
 
 class AnthropicController(BaseController):
-    """A controller that models served on the Anthropic API to generate responses."""
+    """A controller that uses a model served on the Anthropic API to generate responses."""
     model_config = ConfigDict(protected_namespaces=())
 
-    model_name: str = "gpt-3.5-turbo"
+    model_name: str = "claude-3-sonnet-20240229"
     """The name of the model to use for generating responses."""
     client: Any = Field(default_factory=Anthropic, exclude=True)
     """The OpenAI client used to generate responses."""
