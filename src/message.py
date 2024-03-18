@@ -42,8 +42,8 @@ class Message(BaseModel):
         """Returns True if the message requires a response."""
         return self.type in ["prompt", "retry", "format"]
 
-    def to_openai(self) -> dict[str, str]:
-        """Returns the message in an OpenAI API compatible format."""
+    def to_compatible(self) -> dict[str, str]:
+        """Returns the message in a conversation compatible format for most APIs."""
         return {"role": self.conversation_role, "content": self.content}
 
 
