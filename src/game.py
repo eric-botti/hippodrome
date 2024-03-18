@@ -4,7 +4,12 @@ from pydantic import BaseModel, Field
 
 from game_utils import *
 from message import Message, MessageType, AgentMessage
-from agent_interfaces import HumanAgentCLI, OpenAIAgentInterface, HumanAgentInterface
+
+from controllers.openai import OpenAIController
+from controllers.human.base import BaseHumanController
+from controllers.human.cli import HumanCLIController
+
+
 from player import Player
 from data_collection import save
 
@@ -113,7 +118,7 @@ class Game(BaseModel):
     @classmethod
     def from_human_name(
             cls, human_name: str = None,
-            human_interface: Type[HumanAgentInterface] = HumanAgentCLI,
+            human_interface: Type[BaseHumanController] = HumanCLIController,
             human_message_level: str = "verbose"
     ):
         """
@@ -145,7 +150,7 @@ class Game(BaseModel):
                 player_dict["name"] = ai_names.pop()
                 player_id = f"{game_id}-{player_dict['name']}"
                 # all AI players use the OpenAI interface for now - this can be changed in the future
-                player_dict["interface"] = OpenAIAgentInterface(agent_id=player_id, game_id=game_id)
+                player_dict["interface"] = OpenAIController(agent_id=player_id, game_id=game_id)
                 player_dict["message_level"] = "info"
 
             player_dict["player_id"] = player_id

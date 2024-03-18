@@ -4,7 +4,7 @@ import streamlit as st
 from streamlit import session_state
 
 from game_chameleon import ChameleonGame
-from agent_interfaces import HumanAgentInterface
+from controllers import BaseHumanController
 from message import Message
 from prompts import fetch_prompt
 
@@ -28,7 +28,7 @@ if "messages" not in session_state:
     session_state.user_input = None
 
 
-class StreamlitInterface(HumanAgentInterface):
+class StreamlitInterface(BaseHumanController):
     def add_message(self, message: Message):
         super().add_message(message)
         session_state.messages.append(message)

@@ -26,7 +26,7 @@ class Message(BaseModel):
         """The message type in the format used by the LLM."""
 
         # Most LLMs expect the "prompt" to come from a "user" and the "response" to come from an "assistant"
-        # Since the agents are the ones responding to messages, take on the llm_type of "assistant"
+        # Since the contestants are the ones responding to messages, take on the llm_type of "assistant"
         # This can be counterintuitive since they can be controlled by either human or ai
         # Further, The programmatic messages from the game are always "user"
 
@@ -48,7 +48,7 @@ class Message(BaseModel):
 
 
 class AgentMessage(Message):
-    """A message that has been sent to 1 or more agents."""
+    """A message that has been sent to 1 or more contestants."""
 
     agent_ids: List[str]
     """The id/ids of the agent that the message was sent by/to."""

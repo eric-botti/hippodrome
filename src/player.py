@@ -2,7 +2,9 @@ from typing import Literal, List, Type
 
 from pydantic import BaseModel, Field
 
-from agent_interfaces import HumanAgentCLI, BaseAgentInterface
+from controllers import BaseController
+from controllers.human.cli import HumanCLIController
+
 from message import MessageType
 
 Role = Literal["chameleon", "herd"]
@@ -18,7 +20,7 @@ class Player(BaseModel):
     """The id of the player."""
     game_id: str
     """The id of the game the player is in."""
-    interface: BaseAgentInterface = Field(exclude=True)
+    interface: BaseController = Field(exclude=True)
     """The interface used by the agent controlling the player to communicate with the game."""
     message_level: str = "info"
     """The level of messages that the player will receive. Can be "info", "verbose", or "debug"."""
@@ -37,7 +39,7 @@ class Player(BaseModel):
             cls,
             game_id: str,
             message_level: str = "verbose",
-            interface_type: Type[BaseAgentInterface] = HumanAgentCLI,
+            interface_type: Type[BaseController] = HumanCLIController,
             log_messages: bool = False
     ):
         """Creates an observer player."""

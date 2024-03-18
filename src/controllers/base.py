@@ -3,7 +3,6 @@ from typing import Type, NewType, List, Any
 import json
 
 from openai import OpenAI
-from colorama import Fore, Style
 from pydantic import BaseModel, ValidationError, Field, ConfigDict
 
 from output_formats import OutputFormatModel
@@ -11,9 +10,9 @@ from message import Message, AgentMessage
 from data_collection import save
 
 
-class BaseAgentInterface(BaseModel):
+class BaseController(BaseModel):
     """
-    The interface that agents use to receive info from and interact with the game.
+    The interface that controllers use to receive info from and interact with the game.
     This is the base class and should not be used directly.
     """
 
@@ -125,72 +124,3 @@ class BaseAgentInterface(BaseModel):
         # Subclasses should implement this method to generate a response using the message history
         raise NotImplementedError
 
-
-class OpenAIAgentInterface(BaseAgentInterface):
-    """An interface that uses the OpenAI API (or compatible 3rd parties) to generate responses."""
-    model_config = ConfigDict(protected_namespaces=())
-
-    model_name: str = "gpt-3.5-turbo"
-    """The name of the model to use for generating responses."""
-    client: Any = Field(default_factory=OpenAI, exclude=True)
-    """The OpenAI client used to generate responses."""
-
-    def _generate(self) -> str:
-        """Generates a response using the message history"""
-        open_ai_messages = [message.to_openai() for message in self.messages]
-
-        completion = self.client.chat.completions.create(
-            model=self.model_name,
-            messages=open_ai_messages
-        )
-
-        return completion.choices[0].message.content
-
-
-class HumanAgentInterface(BaseAgentInterface):
-    is_human: bool = Field(default=True, frozen=True)
-
-    def generate_formatted_response(
-            self,
-            output_format: Type[OutputFormatModel],
-            additional_fields: dict = None,
-            max_retries: int = 3
-    ) -> OutputFormatModel | None:
-        """For Human agents, we can trust them enough to format their own responses... for now"""
-        response = self.generate_response()
-
-        if response:
-            # only works because current outputs have only 1 field...
-            try:
-                fields = {output_format.model_fields.copy().popitem()[0]: response.content}
-                if additional_fields:
-                    fields.update(additional_fields)
-                output = output_format.model_validate(fields)
-
-            except ValidationError as e:
-                retry_message = Message(type="retry", content=f"Error formatting response: {e} \n\n Please try again.")
-                self.add_message(retry_message)
-                output = None
-
-        else:
-            output = None
-
-        return output
-
-
-class HumanAgentCLI(HumanAgentInterface):
-    """A Human agent that uses the command line interface to generate responses."""
-    def add_message(self, message: Message):
-        super().add_message(message)
-        if message.type == "verbose":
-            print(Fore.GREEN + message.content + Style.RESET_ALL)
-        elif message.type == "debug":
-            print(Fore.YELLOW + "DEBUG: " + message.content + Style.RESET_ALL)
-        elif message.type != "agent":
-            # Prevents the agent from seeing its own messages on the command line
-            print(message.content)
-
-    def _generate(self) -> str:
-        """Generates a response using the message history"""
-        response = input()
-        return response
