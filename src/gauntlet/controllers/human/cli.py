@@ -1,4 +1,4 @@
-from controllers.human.base import BaseHumanController
+from gauntlet.controllers import BaseHumanController
 
 from colorama import Fore, Style
 from message import Message

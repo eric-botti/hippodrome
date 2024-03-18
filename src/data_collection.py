@@ -4,7 +4,6 @@ from typing import NewType
 
 import pydantic
 
-import player
 import message
 
 from pymongo import MongoClient
@@ -37,10 +36,11 @@ def save(log_object: Model):
 
 def get_collection(log_object: Model) -> str:
     from game import Game
+    from gauntlet import Contestant
 
     if isinstance(log_object, message.AgentMessage):
         collection = "messages"
-    elif isinstance(log_object, player.Player):
+    elif isinstance(log_object, Contestant):
         collection = "players"
     elif isinstance(log_object, Game):
         collection = "games"

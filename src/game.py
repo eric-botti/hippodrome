@@ -5,12 +5,9 @@ from pydantic import BaseModel, Field
 from game_utils import *
 from message import Message, MessageType, AgentMessage
 
-from controllers.openai import OpenAIController
-from controllers.human.base import BaseHumanController
-from controllers.human.cli import HumanCLIController
+from gauntlet.controllers import OpenAIController, BaseHumanController, HumanCLIController
 
-
-from player import Player
+from gauntlet import Contestant
 from data_collection import save
 
 # Abstracting the Game Class is a WIP so that future games can be added
@@ -21,9 +18,9 @@ class Game(BaseModel):
 
     game_id: str
     """The unique id of the game."""
-    players: List[Player] = Field(exclude=True)
+    players: List[Contestant] = Field(exclude=True)
     """The players in the game."""
-    observer: Optional[Player]
+    observer: Optional[Contestant]
     """An observer who can see all public messages, but doesn't actually play."""
 
     # Default
@@ -39,21 +36,21 @@ class Game(BaseModel):
 
     number_of_players: ClassVar[int]
     """The number of players in the game."""
-    player_class: ClassVar[Type[Player]] = Player
+    player_class: ClassVar[Type[Contestant]] = Contestant
     """The class of the player used in the game."""
 
-    def player_from_id(self, player_id: str) -> Player:
+    def player_from_id(self, player_id: str) -> Contestant:
         """Returns a player from their ID."""
         return next((player for player in self.players if player.player_id == player_id), None)
 
-    def player_from_name(self, name: str) -> Player:
+    def player_from_name(self, name: str) -> Contestant:
         """Returns a player from their name."""
         return next((player for player in self.players if player.name == name), None)
 
     def game_message(
             self,
             content: str,
-            recipient: Player | List[Player] | None = None,  # If None, message is broadcast to all players
+            recipient: Contestant | List[Contestant] | None = None,  # If None, message is broadcast to all players
             exclude: bool = False,  # If True, the message is broadcast to all players except the chosen player
             message_type: MessageType = "info"
     ):
@@ -69,7 +66,7 @@ class Game(BaseModel):
             if self.observer:
                 recipients.append(self.observer)
         else:
-            if isinstance(recipient, Player):
+            if isinstance(recipient, Contestant):
                 recipients = [recipient]
             else:
                 recipients = recipient
@@ -79,7 +76,7 @@ class Game(BaseModel):
 
         for player in recipients:
             if player.can_receive_message(message_type):
-                player.interface.add_message(message)
+                player.controller.add_message(message)
                 recipient_ids.append(player.player_id)
 
         agent_message = AgentMessage.from_message(message, recipient_ids, self.game_id)
@@ -144,13 +141,13 @@ class Game(BaseModel):
             if human_index == i:
                 player_dict["name"] = human_name
                 player_id = f"{game_id}-human"
-                player_dict["interface"] = human_interface(agent_id=player_id, game_id=game_id)
+                player_dict["controller"] = human_interface(agent_id=player_id, game_id=game_id)
                 player_dict["message_level"] = human_message_level
             else:
                 player_dict["name"] = ai_names.pop()
                 player_id = f"{game_id}-{player_dict['name']}"
                 # all AI players use the OpenAI interface for now - this can be changed in the future
-                player_dict["interface"] = OpenAIController(agent_id=player_id, game_id=game_id)
+                player_dict["controller"] = OpenAIController(agent_id=player_id, game_id=game_id)
                 player_dict["message_level"] = "info"
 
             player_dict["player_id"] = player_id
@@ -158,7 +155,7 @@ class Game(BaseModel):
 
         # Add Observer - an Agent who can see all the messages, but doesn't actually play
         if human_index is None:
-            observer = Player.observer(game_id, interface_type=human_interface)
+            observer = Contestant.observer(game_id, controller_type=human_interface)
         else:
             observer = None
 

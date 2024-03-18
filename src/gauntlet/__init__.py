@@ -1,0 +1,1 @@
+from gauntlet.contestant import Contestant, ContestantSubclass

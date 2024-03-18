@@ -3,8 +3,9 @@ from typing import ClassVar
 
 from game_utils import random_index
 from output_formats import *
-from player import ChameleonPlayer, Player
+from chameleon_contestant import ChameleonContestant
 from prompts import fetch_prompt, format_prompt
+from gauntlet import Contestant
 
 from game import Game
 
@@ -41,11 +42,11 @@ class ChameleonGame(Game):
 
     number_of_players: ClassVar[int] = NUMBER_OF_PLAYERS
     """The number of players in the game."""
-    player_class: ClassVar[Type[Player]] = ChameleonPlayer
+    player_class: ClassVar[Type[Contestant]] = ChameleonContestant
     """The class of the player used in the game."""
 
     @property
-    def chameleon(self) -> ChameleonPlayer:
+    def chameleon(self) -> ChameleonContestant:
         """Returns the current chameleon."""
         return self.player_from_id(self.chameleon_ids[-1])
 
@@ -185,14 +186,14 @@ class ChameleonGame(Game):
 
         self.game_message(f"Each player will now take turns describing themselves:")
 
-    def player_turn_animal_description(self, player: Player):
+    def player_turn_animal_description(self, player: Contestant):
         """Handles a player's turn to describe themselves."""
         if not self.awaiting_input:
             self.verbose_message(f"{player.name} is thinking...", recipient=player, exclude=True)
             self.game_message(fetch_prompt("player_describe_animal"), player)
 
         # Get Player Animal Description
-        response = player.interface.generate_formatted_response(AnimalDescriptionFormat)
+        response = player.controller.generate_formatted_response(AnimalDescriptionFormat)
 
         if response:
             self.round_animal_descriptions.append({"player_id": player.player_id, "description": response.description})
@@ -203,7 +204,7 @@ class ChameleonGame(Game):
 
         return response
 
-    def player_turn_chameleon_guess(self, chameleon: Player):
+    def player_turn_chameleon_guess(self, chameleon: Contestant):
         """Handles the Chameleon's turn to guess the secret animal."""
         if not self.awaiting_input:
             self.game_message("All players have spoken. The Chameleon will now guess the secret animal...")
@@ -212,7 +213,7 @@ class ChameleonGame(Game):
             self.game_message(format_prompt("chameleon_guess_animal", player_responses=player_responses),
                               self.chameleon)
 
-        response = chameleon.interface.generate_formatted_response(ChameleonGuessFormat)
+        response = chameleon.controller.generate_formatted_response(ChameleonGuessFormat)
 
         if response:
             self.chameleon_guesses.append(response.animal)
@@ -224,7 +225,7 @@ class ChameleonGame(Game):
             # Await input and do not proceed to the next phase
             self.awaiting_input = True
 
-    def player_turn_herd_vote(self, player: Player):
+    def player_turn_herd_vote(self, player: Contestant):
         """Handles a player's turn to vote for the Chameleon."""
         if not self.awaiting_input:
             player_responses = self.format_animal_descriptions(exclude=player)
@@ -232,7 +233,7 @@ class ChameleonGame(Game):
 
         # Get Player Vote
         additional_fields = {"player_names": [p.name for p in self.players if p != player]}
-        response = player.interface.generate_formatted_response(HerdVoteFormat, additional_fields=additional_fields)
+        response = player.controller.generate_formatted_response(HerdVoteFormat, additional_fields=additional_fields)
 
         if response:
             self.debug_message(f"{player.name} voted for {response.vote}", recipient=player, exclude=True)
@@ -312,7 +313,7 @@ class ChameleonGame(Game):
         else:
             return None
 
-    def format_animal_descriptions(self, exclude: Player = None) -> str:
+    def format_animal_descriptions(self, exclude: Contestant = None) -> str:
         """Formats the animal description responses of the players into a single string."""
         formatted_responses = ""
         for response in self.round_animal_descriptions:

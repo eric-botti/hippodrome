@@ -2,16 +2,13 @@ from typing import Literal, List, Type
 
 from pydantic import BaseModel, Field
 
-from controllers import BaseController
-from controllers.human.cli import HumanCLIController
+from gauntlet.controllers import BaseController, HumanCLIController
 
 from message import MessageType
 
-Role = Literal["chameleon", "herd"]
-
 
 # Abstraction is a WIP and a little premature, but I'd like to reuse this framework to create more Games in the future
-class Player(BaseModel):
+class Contestant(BaseModel):
     """Base class for a player"""
 
     name: str
@@ -20,7 +17,7 @@ class Player(BaseModel):
     """The id of the player."""
     game_id: str
     """The id of the game the player is in."""
-    interface: BaseController = Field(exclude=True)
+    controller: BaseController = Field(exclude=True)
     """The interface used by the agent controlling the player to communicate with the game."""
     message_level: str = "info"
     """The level of messages that the player will receive. Can be "info", "verbose", or "debug"."""
@@ -39,48 +36,20 @@ class Player(BaseModel):
             cls,
             game_id: str,
             message_level: str = "verbose",
-            interface_type: Type[BaseController] = HumanCLIController,
-            log_messages: bool = False
+            controller_type: Type[BaseController] = HumanCLIController
     ):
         """Creates an observer player."""
         name = "Observer"
         player_id = f"{game_id}-observer"
-        interface = interface_type(agent_id=player_id, game_id=game_id)
+        controller = controller_type(agent_id=player_id, game_id=game_id)
 
-        return cls(name=name, player_id=player_id, game_id=game_id, interface=interface, message_level=message_level)
+        return cls(name=name, player_id=player_id, game_id=game_id, controller=controller, message_level=message_level)
 
 
-class PlayerSubclass(Player):
+class ContestantSubclass(Contestant):
     @classmethod
-    def from_player(cls, player: Player):
+    def from_player(cls, player: Contestant):
         """Creates a new instance of the subclass from a player instance."""
         fields = player.model_dump()
-        fields['interface'] = player.interface
+        fields['controller'] = player.controller
         return cls(**fields)
-
-
-class ChameleonPlayer(PlayerSubclass):
-    """A player in the game Chameleon"""
-
-    points: int = 0
-    """The number of points the player has."""
-    roles: List[Role] = []
-    """The role of the player in the game. Can be "chameleon" or "herd". This changes every round."""
-
-    def assign_role(self, role: Role):
-        self.roles.append(role)
-
-    @property
-    def role(self) -> Role:
-        """The current role of the player."""
-        return self.roles[-1]
-
-    @property
-    def rounds_played_as_chameleon(self) -> int:
-        """The number of times the player has been the Chameleon."""
-        return self.roles.count("chameleon")
-
-    @property
-    def rounds_played_as_herd(self) -> int:
-        """The number of times the player has been in the Herd."""
-        return self.roles.count("herd")

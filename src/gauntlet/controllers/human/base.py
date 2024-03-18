@@ -4,7 +4,7 @@ from pydantic import ValidationError, Field
 
 from output_formats import OutputFormatModel
 from message import Message
-from controllers.base import BaseController
+from gauntlet.controllers import BaseController
 
 
 class BaseHumanController(BaseController):

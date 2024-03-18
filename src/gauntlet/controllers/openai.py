@@ -1,25 +1,25 @@
-from controllers.base import BaseController
+from gauntlet.controllers import BaseController
 
 from typing import Any
 
-from anthropic import Anthropic
+from openai import OpenAI
 from pydantic import Field, ConfigDict
 
 
-class AnthropicController(BaseController):
-    """A controller that uses a model served on the Anthropic API to generate responses."""
+class OpenAIController(BaseController):
+    """A controller that uses the OpenAI API (or compatible 3rd parties) to generate responses."""
     model_config = ConfigDict(protected_namespaces=())
 
-    model_name: str = "claude-3-sonnet-20240229"
+    model_name: str = "gpt-3.5-turbo"
     """The name of the model to use for generating responses."""
-    client: Any = Field(default_factory=Anthropic, exclude=True)
+    client: Any = Field(default_factory=OpenAI, exclude=True)
     """The OpenAI client used to generate responses."""
 
     def _generate(self) -> str:
         """Generates a response using the message history"""
         messages = [message.to_compatible() for message in self.messages]
 
-        completion = self.client.messages.create(
+        completion = self.client.chat.completions.create(
             model=self.model_name,
             messages=messages
         )

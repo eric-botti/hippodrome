@@ -1,5 +1,4 @@
 from game_chameleon import ChameleonGame
-from player import Player
 
 def main():
     print("Please Enter your name, or leave blank to run an AI only game")
