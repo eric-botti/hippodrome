@@ -1,7 +1,7 @@
-from gauntlet.controllers import BaseHumanController
+from hippodrome.controllers import BaseHumanController
 
 from colorama import Fore, Style
-from message import Message
+from hippodrome.message import Message
 
 
 class HumanCLIController(BaseHumanController):

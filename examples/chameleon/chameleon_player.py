@@ -1,11 +1,11 @@
 from typing import List, Literal
 
-from gauntlet.contestant import ContestantSubclass
+from hippodrome import PlayerSubclass
 
 Role = Literal["chameleon", "herd"]
 
 
-class ChameleonContestant(ContestantSubclass):
+class ChameleonPlayer(PlayerSubclass):
     """A player in the game Chameleon"""
 
     points: int = 0

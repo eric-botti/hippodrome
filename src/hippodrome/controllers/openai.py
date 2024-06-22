@@ -1,4 +1,4 @@
-from gauntlet.controllers import BaseController
+from hippodrome.controllers import BaseController
 
 from typing import Any
 

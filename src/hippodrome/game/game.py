@@ -2,29 +2,30 @@ from typing import Optional, Type, List, ClassVar
 
 from pydantic import BaseModel, Field
 
-from game_utils import *
-from message import Message, MessageType, AgentMessage
+from hippodrome.player import Player
+from hippodrome.game.utils import *
+from hippodrome.controllers import BaseController
 
-from gauntlet.controllers import OpenAIController, BaseHumanController, HumanCLIController
+from hippodrome.message import Message, MessageType, AgentMessage
 
-from gauntlet import Contestant
-from data_collection import save
+from hippodrome.controllers import OpenAIController, BaseHumanController, HumanCLIController
+
+
+from hippodrome.data_collection import save
 
 # Abstracting the Game Class is a WIP so that future games can be added
 class Game(BaseModel):
     """Base class for all games."""
 
     # Required
-
     game_id: str
     """The unique id of the game."""
-    players: List[Contestant] = Field(exclude=True)
+    players: List[Player] = Field(exclude=True)
     """The players in the game."""
-    observer: Optional[Contestant]
+    observer: Optional[Player]
     """An observer who can see all public messages, but doesn't actually play."""
 
     # Default
-
     winner_id: str | None = None
     """The id of the player who has won the game."""
     game_state: str = Field("game_start", exclude=True)
@@ -33,24 +34,23 @@ class Game(BaseModel):
     """Whether the game is currently awaiting input from a player."""
 
     # Class Variables
-
     number_of_players: ClassVar[int]
     """The number of players in the game."""
-    player_class: ClassVar[Type[Contestant]] = Contestant
+    player_class: ClassVar[Type[Player]] = Player
     """The class of the player used in the game."""
 
-    def player_from_id(self, player_id: str) -> Contestant:
+    def player_from_id(self, player_id: str) -> Player:
         """Returns a player from their ID."""
         return next((player for player in self.players if player.player_id == player_id), None)
 
-    def player_from_name(self, name: str) -> Contestant:
+    def player_from_name(self, name: str) -> Player:
         """Returns a player from their name."""
         return next((player for player in self.players if player.name == name), None)
 
     def game_message(
             self,
             content: str,
-            recipient: Contestant | List[Contestant] | None = None,  # If None, message is broadcast to all players
+            recipient: Player | List[Player] | None = None,  # If None, message is broadcast to all players
             exclude: bool = False,  # If True, the message is broadcast to all players except the chosen player
             message_type: MessageType = "info"
     ):
@@ -66,7 +66,7 @@ class Game(BaseModel):
             if self.observer:
                 recipients.append(self.observer)
         else:
-            if isinstance(recipient, Contestant):
+            if isinstance(recipient, Player):
                 recipients = [recipient]
             else:
                 recipients = recipient
@@ -155,11 +155,35 @@ class Game(BaseModel):
 
         # Add Observer - an Agent who can see all the messages, but doesn't actually play
         if human_index is None:
-            observer = Contestant.observer(game_id, controller_type=human_interface)
+            observer = Player.observer(game_id, controller_type=human_interface)
         else:
             observer = None
 
         return cls(game_id=game_id, players=players, observer=observer)
 
+    @classmethod
+    def from_controllers(cls, controllers: List[BaseController]):
+        """
+        Instantiates a game with a list of controllers.
+        """
+        game_id = generate_game_id()
 
+        players = []
+
+        if len(controllers) != cls.number_of_players:
+            raise ValueError(f"Expected {cls.number_of_players} controllers, but got {len(controllers)}.")
+
+        player_names = random_names(cls.number_of_players)
+
+        for i, controller in enumerate(controllers):
+            player = cls.player_class(
+                game_id=game_id,
+                controller=controller,
+                name=player_names[i],
+                player_id=f"{game_id}-{controller.agent_id}"
+            )
+
+            players.append(player)
+
+        return cls(game_id=game_id, players=players, observer=None)
 

@@ -1,14 +1,12 @@
-from typing import Literal, List, Type
+from typing import Type
 
 from pydantic import BaseModel, Field
 
-from gauntlet.controllers import BaseController, HumanCLIController
+from hippodrome.controllers import BaseController, HumanCLIController
 
-from message import MessageType
+from hippodrome.message import MessageType
 
-
-# Abstraction is a WIP and a little premature, but I'd like to reuse this framework to create more Games in the future
-class Contestant(BaseModel):
+class Player(BaseModel):
     """Base class for a player"""
 
     name: str
@@ -46,9 +44,9 @@ class Contestant(BaseModel):
         return cls(name=name, player_id=player_id, game_id=game_id, controller=controller, message_level=message_level)
 
 
-class ContestantSubclass(Contestant):
+class PlayerSubclass(Player):
     @classmethod
-    def from_player(cls, player: Contestant):
+    def from_player(cls, player: Player):
         """Creates a new instance of the subclass from a player instance."""
         fields = player.model_dump()
         fields['controller'] = player.controller

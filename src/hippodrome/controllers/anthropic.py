@@ -1,9 +1,7 @@
-from gauntlet.controllers import BaseController
-
+from hippodrome.controllers import BaseController
 from typing import Any
 
-from anthropic import Anthropic
-from pydantic import Field, ConfigDict
+from pydantic import ConfigDict
 
 
 class AnthropicController(BaseController):
@@ -12,8 +10,17 @@ class AnthropicController(BaseController):
 
     model_name: str = "claude-3-sonnet-20240229"
     """The name of the model to use for generating responses."""
-    client: Any = Field(default_factory=Anthropic, exclude=True)
-    """The OpenAI client used to generate responses."""
+    client: Any
+    """The Anthropic client used to generate responses."""
+
+    def __init__(self):
+        try:
+            from anthropic import Anthropic
+            self.client = Anthropic()
+        except ImportError:
+            raise ImportError("The 'anthropic' package is required to use the AnthropicController, but it is not installed. Please install it using 'pip install anthropic'")
+
+        super().__init__()
 
     def _generate(self) -> str:
         """Generates a response using the message history"""

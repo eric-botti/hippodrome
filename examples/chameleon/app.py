@@ -1,11 +1,9 @@
-from typing import Type
-
 import streamlit as st
 from streamlit import session_state
 
 from game_chameleon import ChameleonGame
-from controllers import BaseHumanController
-from message import Message
+from hippodrome.controllers.human import StreamlitHumanController
+from hippodrome import Message
 from prompts import fetch_prompt
 
 st.set_page_config(layout="wide", page_title="Chameleon")
@@ -27,17 +25,17 @@ if "messages" not in session_state:
     session_state.messages = []
     session_state.user_input = None
 
-
-class StreamlitInterface(BaseHumanController):
-    def add_message(self, message: Message):
-        super().add_message(message)
-        session_state.messages.append(message)
-        display_message(message)
-
-    def _generate(self) -> str:
-        response = session_state.user_input
-        session_state.user_input = None
-        return response
+#
+# class StreamlitInterface(BaseHumanController):
+#     def add_message(self, message: Message):
+#         super().add_message(message)
+#         session_state.messages.append(message)
+#         display_message(message)
+#
+#     def _generate(self) -> str:
+#         response = session_state.user_input
+#         session_state.user_input = None
+#         return response
 
 
 # Streamlit App
@@ -69,13 +67,14 @@ with center:
         for message in st.session_state.messages:
             display_message(message)
 
-if user_input:
-    if "game" not in st.session_state:
-        st.session_state.game = ChameleonGame.from_human_name(user_input, StreamlitInterface)
-    else:
-        session_state.user_input = user_input
+    with messages_container:
+        if user_input:
+            if "game" not in st.session_state:
+                st.session_state.game = ChameleonGame.from_human_name(user_input, StreamlitHumanController)
+            else:
+                session_state.user_input = user_input
 
-    st.session_state.game.run_game()
+            st.session_state.game.run_game()
 
 st.markdown("#")
 

@@ -1,0 +1,8 @@
+[build-system]
+requires = ["setuptools"]
+
+[project]
+name = "hippodrome"
+description = "A framework for building games text based games in Python"
+authors = [{ name = "Eric Botti"}]
+version = "0.1.0"

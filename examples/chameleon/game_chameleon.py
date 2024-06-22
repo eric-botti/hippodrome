@@ -1,13 +1,15 @@
 from collections import Counter
-from typing import ClassVar
+import random
+from typing import ClassVar, List, Type
 
-from game_utils import random_index
-from output_formats import *
-from chameleon_contestant import ChameleonContestant
+from hippodrome.game.utils import random_index
+from chameleon_player import ChameleonPlayer
 from prompts import fetch_prompt, format_prompt
-from gauntlet import Contestant
 
-from game import Game
+from hippodrome import Game, Player
+from hippodrome.output_formats import OutputFormatModel
+
+from pydantic import Field, field_validator, model_validator
 
 # Default Values
 NUMBER_OF_PLAYERS = 6
@@ -16,6 +18,44 @@ AVAILABLE_ANIMALS = ["Dog", "Cat", "Mouse", "Hamster", "Monkey", "Rabbit", "Fox"
                      "Lion", "Cow", "Pig", "Frog", "Owl", "Duck", "Chicken", "Butterfly", "Turtle", "Snake", "Octopus",
                      "Squid", "Hedgehog", "Elephant", "Rhinoceros", "Zebra", "Crocodile", "Whale", "Dolphin", "Camel",
                      "Giraffe", "Deer", "Gorilla", "Goat", "Llama", "Horse", "Unicorn", "Flamingo", "Skunk", "Shark"]
+
+
+
+class AnimalDescriptionFormat(OutputFormatModel):
+    # Define fields of our class here
+    description: str = Field(description="A brief description of the animal")
+    """A brief description of the animal"""
+
+    @field_validator('description')
+    @classmethod
+    def check_starting_character(cls, v) -> str:
+        if not v[0].upper() == 'I':
+            raise ValueError("Please rewrite your description so that it begins with 'I'")
+        return v
+
+
+class ChameleonGuessFormat(OutputFormatModel):
+    animal: str = Field(description="Name of the animal you think the Herd is in its singular form, e.g. 'animal' not 'animals'")
+
+    @field_validator('animal')
+    @classmethod
+    def is_one_word(cls, v) -> str:
+        if len(v.split()) > 1:
+            raise ValueError("Animal's name must be one word")
+        return v
+
+
+class HerdVoteFormat(OutputFormatModel):
+    player_names: List[str] = Field([], exclude=True)
+    """The names of the players in the game"""
+    vote: str = Field(description="The name of the player you are voting for")
+    """The name of the player you are voting for"""
+
+    @model_validator(mode="after")
+    def check_player_exists(self) -> "HerdVoteFormat":
+        if self.vote.lower() not in [player.lower() for player in self.player_names]:
+            raise ValueError(f"Player {self.vote} does not exist, please vote for one of {self.player_names}")
+        return self
 
 
 class ChameleonGame(Game):
@@ -42,11 +82,11 @@ class ChameleonGame(Game):
 
     number_of_players: ClassVar[int] = NUMBER_OF_PLAYERS
     """The number of players in the game."""
-    player_class: ClassVar[Type[Contestant]] = ChameleonContestant
+    player_class: ClassVar[Type[Player]] = ChameleonPlayer
     """The class of the player used in the game."""
 
     @property
-    def chameleon(self) -> ChameleonContestant:
+    def chameleon(self) -> ChameleonPlayer:
         """Returns the current chameleon."""
         return self.player_from_id(self.chameleon_ids[-1])
 
@@ -186,7 +226,7 @@ class ChameleonGame(Game):
 
         self.game_message(f"Each player will now take turns describing themselves:")
 
-    def player_turn_animal_description(self, player: Contestant):
+    def player_turn_animal_description(self, player: Player):
         """Handles a player's turn to describe themselves."""
         if not self.awaiting_input:
             self.verbose_message(f"{player.name} is thinking...", recipient=player, exclude=True)
@@ -204,7 +244,7 @@ class ChameleonGame(Game):
 
         return response
 
-    def player_turn_chameleon_guess(self, chameleon: Contestant):
+    def player_turn_chameleon_guess(self, chameleon: Player):
         """Handles the Chameleon's turn to guess the secret animal."""
         if not self.awaiting_input:
             self.game_message("All players have spoken. The Chameleon will now guess the secret animal...")
@@ -225,7 +265,7 @@ class ChameleonGame(Game):
             # Await input and do not proceed to the next phase
             self.awaiting_input = True
 
-    def player_turn_herd_vote(self, player: Contestant):
+    def player_turn_herd_vote(self, player: Player):
         """Handles a player's turn to vote for the Chameleon."""
         if not self.awaiting_input:
             player_responses = self.format_animal_descriptions(exclude=player)
@@ -313,7 +353,7 @@ class ChameleonGame(Game):
         else:
             return None
 
-    def format_animal_descriptions(self, exclude: Contestant = None) -> str:
+    def format_animal_descriptions(self, exclude: Player = None) -> str:
         """Formats the animal description responses of the players into a single string."""
         formatted_responses = ""
         for response in self.round_animal_descriptions:

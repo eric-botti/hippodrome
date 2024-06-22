@@ -2,9 +2,9 @@ from typing import Type
 
 from pydantic import ValidationError, Field
 
-from output_formats import OutputFormatModel
-from message import Message
-from gauntlet.controllers import BaseController
+from hippodrome.output_formats import OutputFormatModel
+from hippodrome.message import Message
+from hippodrome.controllers import BaseController
 
 
 class BaseHumanController(BaseController):
