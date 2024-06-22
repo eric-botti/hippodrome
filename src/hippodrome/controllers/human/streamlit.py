@@ -5,8 +5,6 @@ import streamlit as st
 from streamlit import session_state
 
 
-
-
 def display_message(message: Message):
     if message.type == "verbose":
         st.markdown(f":green[{message.content}]")

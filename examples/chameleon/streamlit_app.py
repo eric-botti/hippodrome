@@ -2,7 +2,7 @@ import streamlit as st
 from streamlit import session_state
 
 from game_chameleon import ChameleonGame
-from hippodrome.controllers.human import StreamlitHumanController
+from hippodrome.controllers.human.streamlit import StreamlitHumanController
 from hippodrome import Message
 from prompts import fetch_prompt
 
