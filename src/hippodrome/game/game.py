@@ -8,10 +8,15 @@ from hippodrome.controllers import BaseController
 
 from hippodrome.message import Message, MessageType, AgentMessage
 
-from hippodrome.controllers import OpenAIController, BaseHumanController, HumanCLIController
+from hippodrome.controllers import (
+    OpenAIController,
+    BaseHumanController,
+    HumanCLIController,
+)
 
 
 from hippodrome.data_collection import save
+
 
 # Abstracting the Game Class is a WIP so that future games can be added
 class Game(BaseModel):
@@ -41,18 +46,25 @@ class Game(BaseModel):
 
     def player_from_id(self, player_id: str) -> Player:
         """Returns a player from their ID."""
-        return next((player for player in self.players if player.player_id == player_id), None)
+        return next(
+            (player for player in self.players if player.player_id == player_id), None
+        )
 
     def player_from_name(self, name: str) -> Player:
         """Returns a player from their name."""
-        return next((player for player in self.players if player.name == name), None)
+        return next(
+            (player for player in self.players if player.name.lower() == name.lower()),
+            None,
+        )
 
     def game_message(
-            self,
-            content: str,
-            recipient: Player | List[Player] | None = None,  # If None, message is broadcast to all players
-            exclude: bool = False,  # If True, the message is broadcast to all players except the chosen player
-            message_type: MessageType = "info"
+        self,
+        content: str,
+        recipient: (
+            Player | List[Player] | None
+        ) = None,  # If None, message is broadcast to all players
+        exclude: bool = False,  # If True, the message is broadcast to all players except the chosen player
+        message_type: MessageType = "info",
     ):
         """
         Sends a message to a player or all players.
@@ -82,7 +94,6 @@ class Game(BaseModel):
         agent_message = AgentMessage.from_message(message, recipient_ids, self.game_id)
         save(agent_message)
 
-
     def verbose_message(self, content: str, **kwargs):
         """
         Sends a verbose message to all players capable of receiving them.
@@ -103,7 +114,9 @@ class Game(BaseModel):
 
     def run_game(self):
         """Runs the game."""
-        raise NotImplementedError("The run_game method must be implemented by the subclass.")
+        raise NotImplementedError(
+            "The run_game method must be implemented by the subclass."
+        )
 
     def end_game(self):
         """Ends the game and declares a winner."""
@@ -114,9 +127,10 @@ class Game(BaseModel):
 
     @classmethod
     def from_human_name(
-            cls, human_name: str = None,
-            human_interface: Type[BaseHumanController] = HumanCLIController,
-            human_message_level: str = "verbose"
+        cls,
+        human_name: str = None,
+        human_interface: Type[BaseHumanController] = HumanCLIController,
+        human_message_level: str = "verbose",
     ):
         """
         Instantiates a game with a human player if a name is provided.
@@ -141,13 +155,17 @@ class Game(BaseModel):
             if human_index == i:
                 player_dict["name"] = human_name
                 player_id = f"{game_id}-human"
-                player_dict["controller"] = human_interface(agent_id=player_id, game_id=game_id)
+                player_dict["controller"] = human_interface(
+                    agent_id=player_id, game_id=game_id
+                )
                 player_dict["message_level"] = human_message_level
             else:
                 player_dict["name"] = ai_names.pop()
                 player_id = f"{game_id}-{player_dict['name']}"
                 # all AI players use the OpenAI interface for now - this can be changed in the future
-                player_dict["controller"] = OpenAIController(agent_id=player_id, game_id=game_id)
+                player_dict["controller"] = OpenAIController(
+                    agent_id=player_id, game_id=game_id
+                )
                 player_dict["message_level"] = "info"
 
             player_dict["player_id"] = player_id
@@ -171,7 +189,9 @@ class Game(BaseModel):
         players = []
 
         if len(controllers) != cls.number_of_players:
-            raise ValueError(f"Expected {cls.number_of_players} controllers, but got {len(controllers)}.")
+            raise ValueError(
+                f"Expected {cls.number_of_players} controllers, but got {len(controllers)}."
+            )
 
         player_names = random_names(cls.number_of_players)
 
@@ -180,10 +200,9 @@ class Game(BaseModel):
                 game_id=game_id,
                 controller=controller,
                 name=player_names[i],
-                player_id=f"{game_id}-{controller.agent_id}"
+                player_id=f"{game_id}-{controller.agent_id}",
             )
 
             players.append(player)
 
         return cls(game_id=game_id, players=players, observer=None)
-
