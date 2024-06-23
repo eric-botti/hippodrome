@@ -3,66 +3,57 @@ import random
 import time
 
 from hippodrome.controllers.human.base import BaseHumanController
+from game_chameleon import ChameleonGame
 
-
-def display_message(message):
-    if message.type == "verbose":
-        print(f"VERBOSE: {message.content}")
-    elif message.type == "debug":
-        print(f"DEBUG: {message.content}")
-    elif message.type != "agent":
-        print(message.content)
-
-
-    message_area = gr.TextArea(
-        value="Please Enter your name, or leave blank to run an AI only game\n\n",
-        interactive=False
-    )
-    msg = gr.Textbox()
-    clear = gr.ClearButton([msg, message_area])
-
-    msg.submit(respond, [msg, message_area], [msg, message_area])
+game_messages = []
+current_user_message = None
 
 
 class GradioController(BaseHumanController):
     def add_message(self, message):
         super().add_message(message)
-        if message.type == "verbose":
-            print(message.content)
-        elif message.type == "debug":
-            print("DEBUG: " + message.content)
-        elif message.type != "agent":
-            print(message.content)
+        game_messages.append(message.content)
 
     def _generate(self):
-        while True:
-            if self._response is not None:
-                response = self._response
-                self._response = None
-                return response
-            time.sleep(0.1)
+        global current_user_message
+        response = current_user_message
+        current_user_message = None
+        return response
 
 
+game = None
 
 with gr.Blocks() as demo:
     instructions = gr.Markdown(
         value="To begin, enter your name or leave blank to run an AI only game"
     )
 
-    message_area = gr.Chatbot(
-        label="Game Area",
-        height="70vh"
-    )
+    message_area = gr.Chatbot(label="Game Area", height="70vh")
     msg = gr.Textbox()
     clear = gr.ClearButton([msg, message_area])
 
     def respond(msg, chat_history):
-        response = "Hello, " + msg
+        global game
+        global game_messages
 
-        chat_history.append((msg, response))
+        if game is None:
+            game = ChameleonGame.from_human_name(msg, GradioController)
+            game_messages.append(f"Welcome {msg}!")
 
-        return '', chat_history
+            game.run_game()
+        else:
+            global current_user_message
+            current_user_message = msg
 
+            game.run_game()
+
+        game_messages_str = "\n\n".join(game_messages)
+        # reset game messages
+        game_messages = []
+
+        chat_history.append((msg, game_messages_str))
+
+        return "", chat_history
 
     msg.submit(respond, [msg, message_area], [msg, message_area])
 
