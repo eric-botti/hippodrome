@@ -16,10 +16,14 @@ def next_message_number():
 class Message(BaseModel):
     """A generic message, these are used to communicate between the game and the players."""
 
+    sender: str = ""
+    """The id of the sender of the message."""
     type: MessageType
     """The type of the message."""
     content: str
     """The content of the message."""
+    recipients: List[str] = Field(default_factory=list)
+    """The id/ids of the players that the message was sent by/to."""
 
     @property
     def conversation_role(self) -> str:
@@ -50,8 +54,6 @@ class Message(BaseModel):
 class AgentMessage(Message):
     """A message that has been sent to 1 or more contestants."""
 
-    agent_ids: List[str]
-    """The id/ids of the agent that the message was sent by/to."""
     game_id: str
     """The id of the game the message was sent during."""
     message_number: int = Field(default_factory=next_message_number)
@@ -63,11 +65,12 @@ class AgentMessage(Message):
         return f"{self.game_id}-{self.message_number}"
 
     @classmethod
-    def from_message(cls, message: Message, agent_ids: List[str], game_id: str) -> "AgentMessage":
+    def from_message(cls, message: Message, recipients: List[str], game_id: str) -> "AgentMessage":
         """Creates an AgentMessage from a Message."""
         return cls(
+            sender=message.sender,
             type=message.type,
             content=message.content,
-            agent_ids=agent_ids,
+            recipients=recipients,
             game_id=game_id
         )

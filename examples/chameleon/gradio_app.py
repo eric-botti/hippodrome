@@ -2,60 +2,57 @@ import gradio as gr
 import random
 import time
 
-from hippodrome.controllers.human.base import BaseHumanController
-from game_chameleon import ChameleonGame
-
-game_messages = []
-current_user_message = None
-
-
-class GradioController(BaseHumanController):
-    def add_message(self, message):
-        super().add_message(message)
-        game_messages.append(message.content)
-
-    def _generate(self):
-        global current_user_message
-        response = current_user_message
-        current_user_message = None
-        return response
-
-
-game = None
-
 with gr.Blocks() as demo:
-    instructions = gr.Markdown(
-        value="To begin, enter your name or leave blank to run an AI only game"
+    chatroom = gr.Chatbot(
+        value=[(None, "Hello! How can I help you today?")],
+        height="70vh",
+        bubble_full_width=False
     )
 
-    message_area = gr.Chatbot(label="Game Area", height="70vh")
+    api_response = gr.JSON()
+
     msg = gr.Textbox()
-    clear = gr.ClearButton([msg, message_area])
+    clear = gr.Button("Clear")
 
-    def respond(msg, chat_history):
-        global game
-        global game_messages
 
-        if game is None:
-            game = ChameleonGame.from_human_name(msg, GradioController)
-            game_messages.append(f"Welcome {msg}!")
+    def user(user_message, history):
+        return "", history + [[user_message, None]]
 
-            game.run_game()
-        else:
-            global current_user_message
-            current_user_message = msg
 
-            game.run_game()
+    def stream_messages():
+        messages = [
+            {"sender": "John", "content": "Hello! How can I help you today?"},
+            {"sender": "Jane", "content": "I'm looking for a restaurant in the center."},
+            {"sender": "Abby", "content": "I'm very shy."},
+        ]
 
-        game_messages_str = "\n\n".join(game_messages)
-        # reset game messages
-        game_messages = []
+        for _ in range(5):
+            time.sleep(0.5)
+            yield random.choice(messages)
 
-        chat_history.append((msg, game_messages_str))
+    def game_ui(history):
+        for bot_message in stream_messages():
+            ui_string = f"{bot_message['sender']}\n{bot_message['content']}"
 
-        return "", chat_history
+            history.append([None, ui_string])
 
-    msg.submit(respond, [msg, message_area], [msg, message_area])
+            yield history
 
+
+    def game():
+        for bot_message in stream_messages():
+            yield bot_message
+
+
+
+    msg.submit(user, [msg, chatroom], [msg, chatroom], queue=False).then(
+        game_ui, chatroom, chatroom
+    )
+    msg.submit(game, [], api_response, queue=False)
+
+    clear.click(lambda: None, None, chatroom, queue=False)
+
+
+demo.queue()
 if __name__ == "__main__":
     demo.launch()

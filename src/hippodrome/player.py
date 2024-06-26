@@ -20,6 +20,10 @@ class Player(BaseModel):
     message_level: str = "info"
     """The level of messages that the player will receive. Can be "info", "verbose", or "debug"."""
 
+    @property
+    def id(self):
+        return self.player_id
+
     def can_receive_message(self, message_type: MessageType) -> bool:
         """Returns True if the player can receive a message of the type."""
         if message_type == "verbose" and self.message_level not in ["verbose", "debug"]:

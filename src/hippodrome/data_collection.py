@@ -8,7 +8,7 @@ from pymongo import MongoClient
 from pydantic import BaseModel
 
 
-DO_DATA_COLLECTION = os.environ.get("DO_DATA_COLLECTION", 0)
+DO_DATA_COLLECTION = bool(int(os.environ.get("DO_DATA_COLLECTION", 0)))
 
 JSONL_DATA_DIR = os.environ.get("JSONL_DATA_DIR")
 
@@ -17,13 +17,16 @@ DB_NAME = os.environ.get("MONGODB_NAME")
 
 Model = NewType("Model", BaseModel)
 
+DO_DATA_COLLECTION = False
+JSONL_DATA_DIR = r"C:\Users\ebott\PycharmProjects\chameleon\data"
+
 
 def save(log_object: Model):
-    collection = get_collection(log_object)
-
     # If data collection is disabled, return early
     if not DO_DATA_COLLECTION:
         return
+
+    collection = get_collection(log_object)
 
     # Multiple data collection modes can be enabled at once
 
@@ -46,6 +49,8 @@ def get_collection(log_object: Model) -> str:
     from hippodrome import Game, Player
 
     if isinstance(log_object, message.AgentMessage):
+        collection = "messages"
+    if isinstance(log_object, message.Message):
         collection = "messages"
     elif isinstance(log_object, Player):
         collection = "players"

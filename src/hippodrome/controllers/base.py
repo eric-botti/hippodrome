@@ -61,7 +61,7 @@ class BaseController(BaseModel):
         """Generates a response based on the current messages in the history."""
         content = self._generate()
         if content:
-            response = Message(type="agent", content=content)
+            response = Message(sender=self.agent_id, type="agent", content=content)
             self.add_message(response)
             save(AgentMessage.from_message(response, [self.agent_id], self.game_id))
             return response

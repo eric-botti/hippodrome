@@ -6,7 +6,7 @@ from hippodrome.game.utils import random_index
 from chameleon_player import ChameleonPlayer
 from prompts import fetch_prompt, format_prompt
 
-from hippodrome import Game, Player
+from hippodrome import Game, Player, Message
 from hippodrome.output_formats import OutputFormatModel
 
 from pydantic import Field, field_validator, model_validator
@@ -230,14 +230,17 @@ class ChameleonGame(Game):
         """Handles a player's turn to describe themselves."""
         if not self.awaiting_input:
             self.verbose_message(f"{player.name} is thinking...", recipient=player, exclude=True)
-            self.game_message(fetch_prompt("player_describe_animal"), player)
+            # self.game_message(fetch_prompt("player_describe_animal"), player)
+            self.game_message(format_prompt("player_describe_animal"), player)
+            # message = Message(sender="game", type="prompt", content=fetch_prompt("player_describe_animal"), recipients=[player.player_id])
+            # self.player_response(message)
 
         # Get Player Animal Description
         response = player.controller.generate_formatted_response(AnimalDescriptionFormat)
 
         if response:
             self.round_animal_descriptions.append({"player_id": player.player_id, "description": response.description})
-            self.game_message(f"{player.name}: {response.description}", player, exclude=True)
+            self.game_message(f"{response.description}", player, exclude=True, sender=player.name)
             self.awaiting_input = False
         else:
             self.awaiting_input = True

@@ -1,7 +1,9 @@
+import asyncio
 from typing import Optional, Type, List, ClassVar
 
 from pydantic import BaseModel, Field
 
+from hippodrome.output_formats import OutputFormatModel
 from hippodrome.player import Player
 from hippodrome.game.utils import *
 from hippodrome.controllers import BaseController
@@ -37,6 +39,10 @@ class Game(BaseModel):
     """Keeps track of the current state of the game."""
     awaiting_input: bool = Field(False, exclude=True)
     """Whether the game is currently awaiting input from a player."""
+    messages: List[Message] = Field(default_factory=list)
+    """The messages sent during the game."""
+    message_queue: List[Message] = asyncio.Queue()
+    """A queue of messages to be sent during the game, these are relayed to the players as they are added."""
 
     # Class Variables
     number_of_players: ClassVar[int]
@@ -65,6 +71,7 @@ class Game(BaseModel):
         ) = None,  # If None, message is broadcast to all players
         exclude: bool = False,  # If True, the message is broadcast to all players except the chosen player
         message_type: MessageType = "info",
+        sender: str = "game",
     ):
         """
         Sends a message to a player or all players.
@@ -83,7 +90,7 @@ class Game(BaseModel):
             else:
                 recipients = recipient
 
-        message = Message(type=message_type, content=content)
+        message = Message(sender=sender, type=message_type, content=content)
         recipient_ids = []
 
         for player in recipients:
@@ -92,7 +99,8 @@ class Game(BaseModel):
                 recipient_ids.append(player.player_id)
 
         agent_message = AgentMessage.from_message(message, recipient_ids, self.game_id)
-        save(agent_message)
+
+        self.add_message(agent_message)
 
     def verbose_message(self, content: str, **kwargs):
         """
@@ -111,6 +119,44 @@ class Game(BaseModel):
         Ex: "Abby is the chameleon."
         """
         self.game_message(content, **kwargs, message_type="debug")
+
+
+    # WIP
+    def player_response(self, message: Message, output_format: Type[OutputFormatModel] = None):
+        """
+        Sends a message to a player and waits for a response.
+        The response is then saved and returned.
+        """
+        # Add the message to the game history
+        self.add_message(message)
+
+        # For each recipient, generate a response
+        for player_id in message.recipients:
+            player = self.player_from_id(player_id)
+
+            # Filter messages to only include messages sent by or to the player
+            player_messages = [m for m in self.messages if message.sender == player_id or player_id in message.recipients]
+
+            if player.controller.is_ai:
+                # If the player is an AI, format the messages appropriately
+                player_messages = [message.to_compatible() for message in self.messages]
+
+            player.controller.messages = player_messages
+
+            # Generate a response
+            new_message = player.controller.generate_response()
+
+            # Add the response to the game history
+            if new_message is not None:
+                self.add_message(new_message)
+
+
+    def add_message(self, message: Message):
+        """Adds a message to the game history."""
+
+        self.messages.append(message)
+        save(message)
+
 
     def run_game(self):
         """Runs the game."""

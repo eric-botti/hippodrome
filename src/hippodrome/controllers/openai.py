@@ -17,7 +17,12 @@ class OpenAIController(BaseController):
 
     def _generate(self) -> str:
         """Generates a response using the message history"""
-        messages = [message.to_compatible() for message in self.messages]
+        messages = []
+        for message in self.messages:
+            if not isinstance(message, dict):
+                messages.append(message.to_compatible())
+            else:
+                messages.append(message)
 
         completion = self.client.chat.completions.create(
             model=self.model_name,
