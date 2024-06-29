@@ -11,12 +11,6 @@ from game_chameleon import ChameleonGame
 from hippodrome.controllers.human.base import BaseHumanController
 
 
-class FastAPIHumanController(BaseHumanController):
-    async def _generate(self) -> str:
-        return "Hello!"
-
-
-
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -39,18 +33,36 @@ async def get():
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
 
-    game = ChameleonGame().from_human_name("John", "fastapi")
+    game = None
+    user_input = None
+
+    class FastAPIHumanController(BaseHumanController):
+        def _generate(self) -> str:
+            nonlocal user_input
+            response = user_input
+            user_input = None
+            return response
+
+    last_round_id = 0
 
     while True:
         player_message = await websocket.receive_json()
         logger.info(f"Received data: {player_message}")
 
-        user_input = player_message["content"]
+        user_input = player_message["message"]["content"]
 
-        for _ in range(random.randint(2, 5)):
-            message = random.choice(["Hello!", "How are you?", "Goodbye!"])
-            sender = random.choice(["john", "jane", "bot1"])
+        if game is None:
+            game = ChameleonGame.from_human_name(user_input, FastAPIHumanController)
+            user_input = None
 
-            await asyncio.sleep(1)
+        game.run_game()
 
-            await websocket.send_json({"sender": sender, "content": message})
+        for message in game.messages[last_round_id : player_message.id]:
+            for recipient in message.recipients:
+                if "human" in recipient:
+                    await websocket.send_json(
+                        {"sender": message.sender, "content": message.content}
+                    )
+                    break
+
+        last_round_id = player_message.id
