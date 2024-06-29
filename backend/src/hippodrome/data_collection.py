@@ -1,5 +1,4 @@
 import os
-import pathlib
 from typing import NewType
 
 from hippodrome import message
@@ -18,7 +17,7 @@ DB_NAME = os.environ.get("MONGODB_NAME")
 Model = NewType("Model", BaseModel)
 
 DO_DATA_COLLECTION = False
-JSONL_DATA_DIR = r"C:\Users\ebott\PycharmProjects\chameleon\data"
+JSONL_DATA_DIR = r"/data"
 
 
 def save(log_object: Model):

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Chat Room</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap');
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Roboto', sans-serif;
+            background: #000000;
+            overflow: hidden;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            background: #ffffff;
+            border-radius: 50%;
+            animation: twinkle 5s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .cosmic-container {
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            height: 100%;
+            background: rgba(13, 17, 23, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .chat-header {
+            background: linear-gradient(45deg, #FF4E50, #FC913A);
+            color: #ffffff;
+            padding: 15px;
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .chat-messages {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            width: 100%;
+        }
+
+        .chat-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400"><rect width="100%" height="100%" fill="rgba(13, 17, 23, 0.8)"/><circle cx="10" cy="10" r="1" fill="white" opacity="0.5"/><circle cx="30" cy="40" r="1" fill="white" opacity="0.7"/><circle cx="70" cy="90" r="1" fill="white" opacity="0.6"/><circle cx="110" cy="30" r="1" fill="white" opacity="0.5"/><circle cx="170" cy="80" r="1" fill="white" opacity="0.7"/><circle cx="190" cy="130" r="1" fill="white" opacity="0.6"/><circle cx="230" cy="50" r="1" fill="white" opacity="0.5"/><circle cx="270" cy="100" r="1" fill="white" opacity="0.7"/><circle cx="310" cy="70" r="1" fill="white" opacity="0.6"/><circle cx="350" cy="120" r="1" fill="white" opacity="0.5"/><circle cx="390" cy="20" r="1" fill="white" opacity="0.7"/></svg>');
+            background-repeat: repeat;
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        .message {
+            max-width: 80%;
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: 20px;
+            word-wrap: break-word;
+            animation: fadeIn 0.5s ease-out;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+            z-index: 1;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.bot {
+            align-self: flex-start;
+            background: rgba(52, 152, 219, 0.2);
+            border: 1px solid rgba(52, 152, 219, 0.5);
+            color: #ffffff;
+        }
+
+        .message.you {
+            align-self: flex-end;
+            background: rgba(46, 204, 113, 0.2);
+            border: 1px solid rgba(46, 204, 113, 0.5);
+            color: #ffffff;
+        }
+
+        .bot-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #FF4E50;
+        }
+
+       .chat-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            min-width: 40vw;
+            height: 100%;
+            margin: 0 auto;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 15px;
+            background: rgba(13, 17, 23, 0.9);
+            width: 100%;
+        }
+
+        #messageInput {
+            flex-grow: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        #messageInput:focus {
+            outline: none;
+            box-shadow: 0 0 15px rgba(52, 152, 219, 0.5);
+        }
+
+        #messageInput::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        button {
+            margin-left: 10px;
+            padding: 10px 20px;
+            background: linear-gradient(45deg, #FF4E50, #FC913A);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1em;
+            font-family: 'Orbitron', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 78, 80, 0.5);
+        }
+
+        .name-dialog {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .name-dialog-content {
+            background: rgba(13, 17, 23, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 30px rgba(255, 255, 255, 0.1); }
+            50% { box-shadow: 0 0 30px rgba(255, 255, 255, 0.3); }
+            100% { box-shadow: 0 0 30px rgba(255, 255, 255, 0.1); }
+        }
+
+        .name-dialog h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: #FF4E50;
+            margin-bottom: 20px;
+        }
+
+        #nameInput {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            font-size: 1em;
+            text-align: center;
+        }
+
+        #nameInput:focus {
+            outline: none;
+            box-shadow: 0 0 15px rgba(52, 152, 219, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+
+    <div class="name-dialog" id="nameDialog">
+        <div class="name-dialog-content">
+            <h2>Welcome, Space Traveler!</h2>
+            <p>Enter your cosmic alias:</p>
+            <input type="text" id="nameInput" placeholder="Cosmic Name">
+            <button onclick="setName()">Embark on Cosmic Chat</button>
+        </div>
+    </div>
+
+    <div class="cosmic-container">
+        <div class="chat-background"></div>
+        <div class="chat-header">Cosmic Chat Room</div>
+
+        <div class="chat-container">
+            <div class="chat-messages" id="chatMessages"></div>
+            <div class="chat-input">
+                <input type="text" id="messageInput" placeholder="Transmit your cosmic message...">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+
+
+
+
+
+
+    </div>
+
+    <script>
+        let userName = '';
+        const socket = new WebSocket('ws://localhost:8000/ws');
+        const chatMessages = document.getElementById('chatMessages');
+        const messageInput = document.getElementById('messageInput');
+        const nameDialog = document.getElementById('nameDialog');
+
+        const botColors = {
+            'System': '#4a4e69',
+            'CosmicAI': '#00b4d8',
+            'StarGazer': '#ff9e00',
+            'NebulaNavi': '#9b5de5'
+        };
+
+        function createStars() {
+            const starsContainer = document.querySelector('.stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.width = `${Math.random() * 3}px`;
+                star.style.height = star.style.width;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                starsContainer.appendChild(star);
+            }
+        }
+
+        function setName() {
+            const nameInput = document.getElementById('nameInput');
+            userName = nameInput.value.trim();
+            if (userName) {
+                nameDialog.style.display = 'none';
+                addMessage({ sender: 'System', content: `Welcome to the cosmic realm, ${userName}!` });
+            }
+        }
+
+        socket.onopen = (event) => {
+            console.log('Cosmic link established:', event);
+        };
+
+        socket.onmessage = (event) => {
+            const message = JSON.parse(event.data);
+            addMessage(message);
+        };
+
+        socket.onclose = (event) => {
+            console.log('Cosmic link severed:', event);
+            addMessage({ sender: 'System', content: 'You have been disconnected from the cosmic chat.' });
+        };
+
+        function addMessage(message) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+
+            if (message.sender === userName) {
+                messageElement.classList.add('you');
+                messageElement.textContent = message.content;
+            } else {
+                messageElement.classList.add('bot');
+                const nameElement = document.createElement('div');
+                nameElement.classList.add('bot-name');
+                nameElement.textContent = message.sender;
+                messageElement.appendChild(nameElement);
+
+                const contentElement = document.createElement('div');
+                contentElement.textContent = message.content;
+                messageElement.appendChild(contentElement);
+
+                const color = botColors[message.sender] || '#e94560';
+                nameElement.style.color = color;
+            }
+
+            chatMessages.appendChild(messageElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function sendMessage() {
+            const content = messageInput.value.trim();
+            if (content && userName) {
+                const message = { sender: userName, content: content };
+                socket.send(JSON.stringify(message));
+                addMessage(message);
+                messageInput.value = '';
+            }
+        }
+
+        messageInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        createStars();
+    </script>
+</body>
+</html>
