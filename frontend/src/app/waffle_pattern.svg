@@ -1,0 +1,2299 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="1200"
+   height="1200"
+   version="1.1"
+   id="svg302"
+   sodipodi:docname="waffle_pattern.svg"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview304"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     showgrid="false"
+     inkscape:zoom="0.21197917"
+     inkscape:cx="-275.97052"
+     inkscape:cy="594.39804"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g2266" />
+  <defs
+     id="defs224">
+    <linearGradient
+       id="waffleGradient"
+       x1="0"
+       y1="0"
+       x2="210"
+       y2="210"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0%"
+         style="stop-color:#F6CA7D;stop-opacity:1"
+         id="stop219" />
+      <stop
+         offset="100%"
+         style="stop-color:#E5B667;stop-opacity:1"
+         id="stop221" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#waffleGradient"
+       id="linearGradient735"
+       gradientUnits="userSpaceOnUse"
+       x1="0"
+       y1="0"
+       x2="210"
+       y2="210" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#waffleGradient-5"
+       id="linearGradient735-6"
+       gradientUnits="userSpaceOnUse"
+       x1="0"
+       y1="0"
+       x2="210"
+       y2="210" />
+    <linearGradient
+       id="waffleGradient-5"
+       x1="0"
+       y1="0"
+       x2="210"
+       y2="210"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0%"
+         style="stop-color:#F6CA7D;stop-opacity:1"
+         id="stop219-5" />
+      <stop
+         offset="100%"
+         style="stop-color:#E5B667;stop-opacity:1"
+         id="stop221-3" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#waffleGradient-5"
+       id="linearGradient1729"
+       gradientUnits="userSpaceOnUse"
+       x1="0"
+       y1="0"
+       x2="210"
+       y2="210" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#waffleGradient"
+       id="linearGradient1956"
+       gradientUnits="userSpaceOnUse"
+       x1="0"
+       y1="0"
+       x2="210"
+       y2="210" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#waffleGradient-5"
+       id="linearGradient2268"
+       gradientUnits="userSpaceOnUse"
+       x1="0"
+       y1="0"
+       x2="210"
+       y2="210" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#waffleGradient"
+       id="linearGradient3257"
+       gradientUnits="userSpaceOnUse"
+       x1="0"
+       y1="0"
+       x2="210"
+       y2="210" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#waffleGradient"
+       id="linearGradient3339"
+       gradientUnits="userSpaceOnUse"
+       x1="0"
+       y1="0"
+       x2="210"
+       y2="210" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#waffleGradient-5"
+       id="linearGradient2268-8"
+       gradientUnits="userSpaceOnUse"
+       x1="0"
+       y1="0"
+       x2="210"
+       y2="210" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#waffleGradient-5"
+       id="linearGradient2268-6"
+       gradientUnits="userSpaceOnUse"
+       x1="0"
+       y1="0"
+       x2="210"
+       y2="210" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#waffleGradient-5"
+       id="linearGradient3860"
+       gradientUnits="userSpaceOnUse"
+       x1="0"
+       y1="0"
+       x2="210"
+       y2="210" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#waffleGradient-5"
+       id="linearGradient2268-61"
+       gradientUnits="userSpaceOnUse"
+       x1="0"
+       y1="0"
+       x2="210"
+       y2="210" />
+  </defs>
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="Waffle 1 Layer"
+     transform="rotate(30,516.15846,564.40899)">
+    <g
+       id="g509"
+       inkscape:label="Waffle 1"
+       transform="translate(-43.214597,24.949567)">
+      <g
+         transform="translate(11,11)"
+         id="g228">
+        <rect
+           width="218"
+           height="218"
+           rx="25"
+           ry="25"
+           fill="#8b4513"
+           id="rect226"
+           x="0"
+           y="0" />
+        <!-- Background rectangle -->
+      </g>
+      <g
+         transform="translate(15,15)"
+         id="g232">
+        <rect
+           width="210"
+           height="210"
+           rx="20"
+           ry="20"
+           fill="url(#waffleGradient)"
+           id="rect230"
+           x="0"
+           y="0"
+           style="fill:url(#linearGradient1956)" />
+      </g>
+      <g
+         fill="#d58a2f"
+         transform="translate(15,15)"
+         id="g266">
+        <!-- Darker shade of the current color -->
+        <rect
+           x="10"
+           y="10"
+           width="40"
+           height="40"
+           id="rect234" />
+        <rect
+           x="60"
+           y="10"
+           width="40"
+           height="40"
+           id="rect236" />
+        <rect
+           x="110"
+           y="10"
+           width="40"
+           height="40"
+           id="rect238" />
+        <rect
+           x="160"
+           y="10"
+           width="40"
+           height="40"
+           id="rect240" />
+        <rect
+           x="10"
+           y="60"
+           width="40"
+           height="40"
+           id="rect242" />
+        <rect
+           x="60"
+           y="60"
+           width="40"
+           height="40"
+           id="rect244" />
+        <rect
+           x="110"
+           y="60"
+           width="40"
+           height="40"
+           id="rect246" />
+        <rect
+           x="160"
+           y="60"
+           width="40"
+           height="40"
+           id="rect248" />
+        <rect
+           x="10"
+           y="110"
+           width="40"
+           height="40"
+           id="rect250" />
+        <rect
+           x="60"
+           y="110"
+           width="40"
+           height="40"
+           id="rect252" />
+        <rect
+           x="110"
+           y="110"
+           width="40"
+           height="40"
+           id="rect254" />
+        <rect
+           x="160"
+           y="110"
+           width="40"
+           height="40"
+           id="rect256" />
+        <rect
+           x="10"
+           y="160"
+           width="40"
+           height="40"
+           id="rect258" />
+        <rect
+           x="60"
+           y="160"
+           width="40"
+           height="40"
+           id="rect260" />
+        <rect
+           x="110"
+           y="160"
+           width="40"
+           height="40"
+           id="rect262" />
+        <rect
+           x="160"
+           y="160"
+           width="40"
+           height="40"
+           id="rect264" />
+      </g>
+      <g
+         fill="#f49f2a"
+         transform="translate(15,15)"
+         id="g300">
+        <!-- Original color for shadow effect -->
+        <path
+           d="M 30,20 H 50 V 50 H 15 V 30 Q 15,20 25,20 Z"
+           id="path268" />
+        <path
+           d="m 75,20 h 25 V 50 H 65 V 30 Q 65,20 75,20 Z"
+           id="path270" />
+        <path
+           d="m 125,20 h 25 V 50 H 115 V 30 q 0,-10 10,-10 z"
+           id="path272" />
+        <path
+           d="m 175,20 h 25 V 50 H 165 V 30 q 0,-10 10,-10 z"
+           id="path274" />
+        <path
+           d="m 25,70 h 25 v 30 H 15 V 80 Q 15,70 25,70 Z"
+           id="path276" />
+        <path
+           d="m 75,70 h 25 v 30 H 65 V 80 Q 65,70 75,70 Z"
+           id="path278" />
+        <path
+           d="m 125,70 h 25 v 30 H 115 V 80 q 0,-10 10,-10 z"
+           id="path280" />
+        <path
+           d="m 175,70 h 25 v 30 H 165 V 80 q 0,-10 10,-10 z"
+           id="path282" />
+        <path
+           d="m 25,120 h 25 v 30 H 15 v -20 q 0,-10 10,-10 z"
+           id="path284" />
+        <path
+           d="m 75,120 h 25 v 30 H 65 v -20 q 0,-10 10,-10 z"
+           id="path286" />
+        <path
+           d="m 125,120 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path288" />
+        <path
+           d="m 175,120 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path290" />
+        <path
+           d="m 25,170 h 25 v 30 H 15 v -20 q 0,-10 10,-10 z"
+           id="path292" />
+        <path
+           d="m 75,170 h 25 v 30 H 65 v -20 q 0,-10 10,-10 z"
+           id="path294" />
+        <path
+           d="m 125,170 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path296" />
+        <path
+           d="m 175,170 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path298" />
+      </g>
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="g3255"
+     inkscape:label="Waffle 1 Layer copy"
+     transform="rotate(30,-1723.072,1164.409)">
+    <g
+       id="g3253"
+       inkscape:label="Waffle 1"
+       transform="translate(-43.214597,24.949567)">
+      <g
+         transform="translate(11,11)"
+         id="g3179">
+        <rect
+           width="218"
+           height="218"
+           rx="25"
+           ry="25"
+           fill="#8b4513"
+           id="rect3177"
+           x="0"
+           y="0" />
+        <!-- Background rectangle -->
+      </g>
+      <g
+         transform="translate(15,15)"
+         id="g3183">
+        <rect
+           width="210"
+           height="210"
+           rx="20"
+           ry="20"
+           fill="url(#waffleGradient)"
+           id="rect3181"
+           x="0"
+           y="0"
+           style="fill:url(#linearGradient3257)" />
+      </g>
+      <g
+         fill="#d58a2f"
+         transform="translate(15,15)"
+         id="g3217">
+        <!-- Darker shade of the current color -->
+        <rect
+           x="10"
+           y="10"
+           width="40"
+           height="40"
+           id="rect3185" />
+        <rect
+           x="60"
+           y="10"
+           width="40"
+           height="40"
+           id="rect3187" />
+        <rect
+           x="110"
+           y="10"
+           width="40"
+           height="40"
+           id="rect3189" />
+        <rect
+           x="160"
+           y="10"
+           width="40"
+           height="40"
+           id="rect3191" />
+        <rect
+           x="10"
+           y="60"
+           width="40"
+           height="40"
+           id="rect3193" />
+        <rect
+           x="60"
+           y="60"
+           width="40"
+           height="40"
+           id="rect3195" />
+        <rect
+           x="110"
+           y="60"
+           width="40"
+           height="40"
+           id="rect3197" />
+        <rect
+           x="160"
+           y="60"
+           width="40"
+           height="40"
+           id="rect3199" />
+        <rect
+           x="10"
+           y="110"
+           width="40"
+           height="40"
+           id="rect3201" />
+        <rect
+           x="60"
+           y="110"
+           width="40"
+           height="40"
+           id="rect3203" />
+        <rect
+           x="110"
+           y="110"
+           width="40"
+           height="40"
+           id="rect3205" />
+        <rect
+           x="160"
+           y="110"
+           width="40"
+           height="40"
+           id="rect3207" />
+        <rect
+           x="10"
+           y="160"
+           width="40"
+           height="40"
+           id="rect3209" />
+        <rect
+           x="60"
+           y="160"
+           width="40"
+           height="40"
+           id="rect3211" />
+        <rect
+           x="110"
+           y="160"
+           width="40"
+           height="40"
+           id="rect3213" />
+        <rect
+           x="160"
+           y="160"
+           width="40"
+           height="40"
+           id="rect3215" />
+      </g>
+      <g
+         fill="#f49f2a"
+         transform="translate(15,15)"
+         id="g3251">
+        <!-- Original color for shadow effect -->
+        <path
+           d="M 30,20 H 50 V 50 H 15 V 30 Q 15,20 25,20 Z"
+           id="path3219" />
+        <path
+           d="m 75,20 h 25 V 50 H 65 V 30 Q 65,20 75,20 Z"
+           id="path3221" />
+        <path
+           d="m 125,20 h 25 V 50 H 115 V 30 q 0,-10 10,-10 z"
+           id="path3223" />
+        <path
+           d="m 175,20 h 25 V 50 H 165 V 30 q 0,-10 10,-10 z"
+           id="path3225" />
+        <path
+           d="m 25,70 h 25 v 30 H 15 V 80 Q 15,70 25,70 Z"
+           id="path3227" />
+        <path
+           d="m 75,70 h 25 v 30 H 65 V 80 Q 65,70 75,70 Z"
+           id="path3229" />
+        <path
+           d="m 125,70 h 25 v 30 H 115 V 80 q 0,-10 10,-10 z"
+           id="path3231" />
+        <path
+           d="m 175,70 h 25 v 30 H 165 V 80 q 0,-10 10,-10 z"
+           id="path3233" />
+        <path
+           d="m 25,120 h 25 v 30 H 15 v -20 q 0,-10 10,-10 z"
+           id="path3235" />
+        <path
+           d="m 75,120 h 25 v 30 H 65 v -20 q 0,-10 10,-10 z"
+           id="path3237" />
+        <path
+           d="m 125,120 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path3239" />
+        <path
+           d="m 175,120 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path3241" />
+        <path
+           d="m 25,170 h 25 v 30 H 15 v -20 q 0,-10 10,-10 z"
+           id="path3243" />
+        <path
+           d="m 75,170 h 25 v 30 H 65 v -20 q 0,-10 10,-10 z"
+           id="path3245" />
+        <path
+           d="m 125,170 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path3247" />
+        <path
+           d="m 175,170 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path3249" />
+      </g>
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="g733"
+     inkscape:label="Waffle 4"
+     transform="rotate(30,-1003.6619,863.64363)">
+    <g
+       id="g731"
+       inkscape:label="Waffle 1"
+       transform="translate(-343.22895,171.20049)">
+      <g
+         transform="translate(11,11)"
+         id="g657">
+        <rect
+           width="218"
+           height="218"
+           rx="25"
+           ry="25"
+           fill="#8b4513"
+           id="rect655"
+           x="0"
+           y="0" />
+        <!-- Background rectangle -->
+      </g>
+      <g
+         transform="translate(15,15)"
+         id="g661">
+        <rect
+           width="210"
+           height="210"
+           rx="20"
+           ry="20"
+           fill="url(#waffleGradient)"
+           id="rect659"
+           x="0"
+           y="0"
+           style="fill:url(#linearGradient735)" />
+      </g>
+      <g
+         fill="#d58a2f"
+         transform="translate(15,15)"
+         id="g695">
+        <!-- Darker shade of the current color -->
+        <rect
+           x="10"
+           y="10"
+           width="40"
+           height="40"
+           id="rect663" />
+        <rect
+           x="60"
+           y="10"
+           width="40"
+           height="40"
+           id="rect665" />
+        <rect
+           x="110"
+           y="10"
+           width="40"
+           height="40"
+           id="rect667" />
+        <rect
+           x="160"
+           y="10"
+           width="40"
+           height="40"
+           id="rect669" />
+        <rect
+           x="10"
+           y="60"
+           width="40"
+           height="40"
+           id="rect671" />
+        <rect
+           x="60"
+           y="60"
+           width="40"
+           height="40"
+           id="rect673" />
+        <rect
+           x="110"
+           y="60"
+           width="40"
+           height="40"
+           id="rect675" />
+        <rect
+           x="160"
+           y="60"
+           width="40"
+           height="40"
+           id="rect677" />
+        <rect
+           x="10"
+           y="110"
+           width="40"
+           height="40"
+           id="rect679" />
+        <rect
+           x="60"
+           y="110"
+           width="40"
+           height="40"
+           id="rect681" />
+        <rect
+           x="110"
+           y="110"
+           width="40"
+           height="40"
+           id="rect683" />
+        <rect
+           x="160"
+           y="110"
+           width="40"
+           height="40"
+           id="rect685" />
+        <rect
+           x="10"
+           y="160"
+           width="40"
+           height="40"
+           id="rect687" />
+        <rect
+           x="60"
+           y="160"
+           width="40"
+           height="40"
+           id="rect689" />
+        <rect
+           x="110"
+           y="160"
+           width="40"
+           height="40"
+           id="rect691" />
+        <rect
+           x="160"
+           y="160"
+           width="40"
+           height="40"
+           id="rect693" />
+      </g>
+      <g
+         fill="#f49f2a"
+         transform="translate(15,15)"
+         id="g729">
+        <!-- Original color for shadow effect -->
+        <path
+           d="M 30,20 H 50 V 50 H 15 V 30 Q 15,20 25,20 Z"
+           id="path697" />
+        <path
+           d="m 75,20 h 25 V 50 H 65 V 30 Q 65,20 75,20 Z"
+           id="path699" />
+        <path
+           d="m 125,20 h 25 V 50 H 115 V 30 q 0,-10 10,-10 z"
+           id="path701" />
+        <path
+           d="m 175,20 h 25 V 50 H 165 V 30 q 0,-10 10,-10 z"
+           id="path703" />
+        <path
+           d="m 25,70 h 25 v 30 H 15 V 80 Q 15,70 25,70 Z"
+           id="path705" />
+        <path
+           d="m 75,70 h 25 v 30 H 65 V 80 Q 65,70 75,70 Z"
+           id="path707" />
+        <path
+           d="m 125,70 h 25 v 30 H 115 V 80 q 0,-10 10,-10 z"
+           id="path709" />
+        <path
+           d="m 175,70 h 25 v 30 H 165 V 80 q 0,-10 10,-10 z"
+           id="path711" />
+        <path
+           d="m 25,120 h 25 v 30 H 15 v -20 q 0,-10 10,-10 z"
+           id="path713" />
+        <path
+           d="m 75,120 h 25 v 30 H 65 v -20 q 0,-10 10,-10 z"
+           id="path715" />
+        <path
+           d="m 125,120 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path717" />
+        <path
+           d="m 175,120 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path719" />
+        <path
+           d="m 25,170 h 25 v 30 H 15 v -20 q 0,-10 10,-10 z"
+           id="path721" />
+        <path
+           d="m 75,170 h 25 v 30 H 65 v -20 q 0,-10 10,-10 z"
+           id="path723" />
+        <path
+           d="m 125,170 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path725" />
+        <path
+           d="m 175,170 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path727" />
+      </g>
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="g3337"
+     inkscape:label="Waffle 4 copy"
+     transform="rotate(30,-403.66212,3102.8733)">
+    <g
+       id="g3335"
+       inkscape:label="Waffle 1"
+       transform="translate(-343.22895,171.20049)">
+      <g
+         transform="translate(11,11)"
+         id="g3261">
+        <rect
+           width="218"
+           height="218"
+           rx="25"
+           ry="25"
+           fill="#8b4513"
+           id="rect3259"
+           x="0"
+           y="0" />
+        <!-- Background rectangle -->
+      </g>
+      <g
+         transform="translate(15,15)"
+         id="g3265">
+        <rect
+           width="210"
+           height="210"
+           rx="20"
+           ry="20"
+           fill="url(#waffleGradient)"
+           id="rect3263"
+           x="0"
+           y="0"
+           style="fill:url(#linearGradient3339)" />
+      </g>
+      <g
+         fill="#d58a2f"
+         transform="translate(15,15)"
+         id="g3299">
+        <!-- Darker shade of the current color -->
+        <rect
+           x="10"
+           y="10"
+           width="40"
+           height="40"
+           id="rect3267" />
+        <rect
+           x="60"
+           y="10"
+           width="40"
+           height="40"
+           id="rect3269" />
+        <rect
+           x="110"
+           y="10"
+           width="40"
+           height="40"
+           id="rect3271" />
+        <rect
+           x="160"
+           y="10"
+           width="40"
+           height="40"
+           id="rect3273" />
+        <rect
+           x="10"
+           y="60"
+           width="40"
+           height="40"
+           id="rect3275" />
+        <rect
+           x="60"
+           y="60"
+           width="40"
+           height="40"
+           id="rect3277" />
+        <rect
+           x="110"
+           y="60"
+           width="40"
+           height="40"
+           id="rect3279" />
+        <rect
+           x="160"
+           y="60"
+           width="40"
+           height="40"
+           id="rect3281" />
+        <rect
+           x="10"
+           y="110"
+           width="40"
+           height="40"
+           id="rect3283" />
+        <rect
+           x="60"
+           y="110"
+           width="40"
+           height="40"
+           id="rect3285" />
+        <rect
+           x="110"
+           y="110"
+           width="40"
+           height="40"
+           id="rect3287" />
+        <rect
+           x="160"
+           y="110"
+           width="40"
+           height="40"
+           id="rect3289" />
+        <rect
+           x="10"
+           y="160"
+           width="40"
+           height="40"
+           id="rect3291" />
+        <rect
+           x="60"
+           y="160"
+           width="40"
+           height="40"
+           id="rect3293" />
+        <rect
+           x="110"
+           y="160"
+           width="40"
+           height="40"
+           id="rect3295" />
+        <rect
+           x="160"
+           y="160"
+           width="40"
+           height="40"
+           id="rect3297" />
+      </g>
+      <g
+         fill="#f49f2a"
+         transform="translate(15,15)"
+         id="g3333">
+        <!-- Original color for shadow effect -->
+        <path
+           d="M 30,20 H 50 V 50 H 15 V 30 Q 15,20 25,20 Z"
+           id="path3301" />
+        <path
+           d="m 75,20 h 25 V 50 H 65 V 30 Q 65,20 75,20 Z"
+           id="path3303" />
+        <path
+           d="m 125,20 h 25 V 50 H 115 V 30 q 0,-10 10,-10 z"
+           id="path3305" />
+        <path
+           d="m 175,20 h 25 V 50 H 165 V 30 q 0,-10 10,-10 z"
+           id="path3307" />
+        <path
+           d="m 25,70 h 25 v 30 H 15 V 80 Q 15,70 25,70 Z"
+           id="path3309" />
+        <path
+           d="m 75,70 h 25 v 30 H 65 V 80 Q 65,70 75,70 Z"
+           id="path3311" />
+        <path
+           d="m 125,70 h 25 v 30 H 115 V 80 q 0,-10 10,-10 z"
+           id="path3313" />
+        <path
+           d="m 175,70 h 25 v 30 H 165 V 80 q 0,-10 10,-10 z"
+           id="path3315" />
+        <path
+           d="m 25,120 h 25 v 30 H 15 v -20 q 0,-10 10,-10 z"
+           id="path3317" />
+        <path
+           d="m 75,120 h 25 v 30 H 65 v -20 q 0,-10 10,-10 z"
+           id="path3319" />
+        <path
+           d="m 125,120 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path3321" />
+        <path
+           d="m 175,120 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path3323" />
+        <path
+           d="m 25,170 h 25 v 30 H 15 v -20 q 0,-10 10,-10 z"
+           id="path3325" />
+        <path
+           d="m 75,170 h 25 v 30 H 65 v -20 q 0,-10 10,-10 z"
+           id="path3327" />
+        <path
+           d="m 125,170 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path3329" />
+        <path
+           d="m 175,170 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path3331" />
+      </g>
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="g733-4"
+     inkscape:label="Waffle 2"
+     transform="rotate(-15,343.72236,-2355.7837)">
+    <g
+       id="g731-0"
+       inkscape:label="Waffle 1"
+       transform="translate(403.29562,229.29359)">
+      <g
+         transform="translate(11,11)"
+         id="g657-1">
+        <rect
+           width="218"
+           height="218"
+           rx="25"
+           ry="25"
+           fill="#8b4513"
+           id="rect655-6"
+           x="0"
+           y="0" />
+        <!-- Background rectangle -->
+      </g>
+      <g
+         transform="translate(15,15)"
+         id="g661-7">
+        <rect
+           width="210"
+           height="210"
+           rx="20"
+           ry="20"
+           fill="url(#waffleGradient)"
+           id="rect659-0"
+           x="0"
+           y="0"
+           style="fill:url(#linearGradient735-6)" />
+      </g>
+      <g
+         fill="#d58a2f"
+         transform="translate(15,15)"
+         id="g695-5">
+        <!-- Darker shade of the current color -->
+        <rect
+           x="10"
+           y="10"
+           width="40"
+           height="40"
+           id="rect663-1" />
+        <rect
+           x="60"
+           y="10"
+           width="40"
+           height="40"
+           id="rect665-1" />
+        <rect
+           x="110"
+           y="10"
+           width="40"
+           height="40"
+           id="rect667-3" />
+        <rect
+           x="160"
+           y="10"
+           width="40"
+           height="40"
+           id="rect669-7" />
+        <rect
+           x="10"
+           y="60"
+           width="40"
+           height="40"
+           id="rect671-9" />
+        <rect
+           x="60"
+           y="60"
+           width="40"
+           height="40"
+           id="rect673-7" />
+        <rect
+           x="110"
+           y="60"
+           width="40"
+           height="40"
+           id="rect675-8" />
+        <rect
+           x="160"
+           y="60"
+           width="40"
+           height="40"
+           id="rect677-4" />
+        <rect
+           x="10"
+           y="110"
+           width="40"
+           height="40"
+           id="rect679-7" />
+        <rect
+           x="60"
+           y="110"
+           width="40"
+           height="40"
+           id="rect681-8" />
+        <rect
+           x="110"
+           y="110"
+           width="40"
+           height="40"
+           id="rect683-6" />
+        <rect
+           x="160"
+           y="110"
+           width="40"
+           height="40"
+           id="rect685-7" />
+        <rect
+           x="10"
+           y="160"
+           width="40"
+           height="40"
+           id="rect687-2" />
+        <rect
+           x="60"
+           y="160"
+           width="40"
+           height="40"
+           id="rect689-5" />
+        <rect
+           x="110"
+           y="160"
+           width="40"
+           height="40"
+           id="rect691-7" />
+        <rect
+           x="160"
+           y="160"
+           width="40"
+           height="40"
+           id="rect693-0" />
+      </g>
+      <g
+         fill="#f49f2a"
+         transform="translate(15,15)"
+         id="g729-0">
+        <!-- Original color for shadow effect -->
+        <path
+           d="M 30,20 H 50 V 50 H 15 V 30 Q 15,20 25,20 Z"
+           id="path697-7" />
+        <path
+           d="m 75,20 h 25 V 50 H 65 V 30 Q 65,20 75,20 Z"
+           id="path699-6" />
+        <path
+           d="m 125,20 h 25 V 50 H 115 V 30 q 0,-10 10,-10 z"
+           id="path701-0" />
+        <path
+           d="m 175,20 h 25 V 50 H 165 V 30 q 0,-10 10,-10 z"
+           id="path703-6" />
+        <path
+           d="m 25,70 h 25 v 30 H 15 V 80 Q 15,70 25,70 Z"
+           id="path705-9" />
+        <path
+           d="m 75,70 h 25 v 30 H 65 V 80 Q 65,70 75,70 Z"
+           id="path707-9" />
+        <path
+           d="m 125,70 h 25 v 30 H 115 V 80 q 0,-10 10,-10 z"
+           id="path709-0" />
+        <path
+           d="m 175,70 h 25 v 30 H 165 V 80 q 0,-10 10,-10 z"
+           id="path711-5" />
+        <path
+           d="m 25,120 h 25 v 30 H 15 v -20 q 0,-10 10,-10 z"
+           id="path713-2" />
+        <path
+           d="m 75,120 h 25 v 30 H 65 v -20 q 0,-10 10,-10 z"
+           id="path715-0" />
+        <path
+           d="m 125,120 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path717-4" />
+        <path
+           d="m 175,120 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path719-8" />
+        <path
+           d="m 25,170 h 25 v 30 H 15 v -20 q 0,-10 10,-10 z"
+           id="path721-9" />
+        <path
+           d="m 75,170 h 25 v 30 H 65 v -20 q 0,-10 10,-10 z"
+           id="path723-0" />
+        <path
+           d="m 125,170 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path725-0" />
+        <path
+           d="m 175,170 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path727-7" />
+      </g>
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="g1727"
+     inkscape:label="Waffle 2 copy"
+     transform="rotate(-15,414.65914,744.51755)">
+    <g
+       id="g1725"
+       inkscape:label="Waffle 1"
+       transform="translate(49.018647,5.9915629)">
+      <g
+         transform="translate(11,11)"
+         id="g1651">
+        <rect
+           width="218"
+           height="218"
+           rx="25"
+           ry="25"
+           fill="#8b4513"
+           id="rect1649"
+           x="0"
+           y="0" />
+        <!-- Background rectangle -->
+      </g>
+      <g
+         transform="translate(15,15)"
+         id="g1655">
+        <rect
+           width="210"
+           height="210"
+           rx="20"
+           ry="20"
+           fill="url(#waffleGradient)"
+           id="rect1653"
+           x="0"
+           y="0"
+           style="fill:url(#linearGradient1729)" />
+      </g>
+      <g
+         fill="#d58a2f"
+         transform="translate(15,15)"
+         id="g1689">
+        <!-- Darker shade of the current color -->
+        <rect
+           x="10"
+           y="10"
+           width="40"
+           height="40"
+           id="rect1657" />
+        <rect
+           x="60"
+           y="10"
+           width="40"
+           height="40"
+           id="rect1659" />
+        <rect
+           x="110"
+           y="10"
+           width="40"
+           height="40"
+           id="rect1661" />
+        <rect
+           x="160"
+           y="10"
+           width="40"
+           height="40"
+           id="rect1663" />
+        <rect
+           x="10"
+           y="60"
+           width="40"
+           height="40"
+           id="rect1665" />
+        <rect
+           x="60"
+           y="60"
+           width="40"
+           height="40"
+           id="rect1667" />
+        <rect
+           x="110"
+           y="60"
+           width="40"
+           height="40"
+           id="rect1669" />
+        <rect
+           x="160"
+           y="60"
+           width="40"
+           height="40"
+           id="rect1671" />
+        <rect
+           x="10"
+           y="110"
+           width="40"
+           height="40"
+           id="rect1673" />
+        <rect
+           x="60"
+           y="110"
+           width="40"
+           height="40"
+           id="rect1675" />
+        <rect
+           x="110"
+           y="110"
+           width="40"
+           height="40"
+           id="rect1677" />
+        <rect
+           x="160"
+           y="110"
+           width="40"
+           height="40"
+           id="rect1679" />
+        <rect
+           x="10"
+           y="160"
+           width="40"
+           height="40"
+           id="rect1681" />
+        <rect
+           x="60"
+           y="160"
+           width="40"
+           height="40"
+           id="rect1683" />
+        <rect
+           x="110"
+           y="160"
+           width="40"
+           height="40"
+           id="rect1685" />
+        <rect
+           x="160"
+           y="160"
+           width="40"
+           height="40"
+           id="rect1687" />
+      </g>
+      <g
+         fill="#f49f2a"
+         transform="translate(15,15)"
+         id="g1723">
+        <!-- Original color for shadow effect -->
+        <path
+           d="M 30,20 H 50 V 50 H 15 V 30 Q 15,20 25,20 Z"
+           id="path1691" />
+        <path
+           d="m 75,20 h 25 V 50 H 65 V 30 Q 65,20 75,20 Z"
+           id="path1693" />
+        <path
+           d="m 125,20 h 25 V 50 H 115 V 30 q 0,-10 10,-10 z"
+           id="path1695" />
+        <path
+           d="m 175,20 h 25 V 50 H 165 V 30 q 0,-10 10,-10 z"
+           id="path1697" />
+        <path
+           d="m 25,70 h 25 v 30 H 15 V 80 Q 15,70 25,70 Z"
+           id="path1699" />
+        <path
+           d="m 75,70 h 25 v 30 H 65 V 80 Q 65,70 75,70 Z"
+           id="path1701" />
+        <path
+           d="m 125,70 h 25 v 30 H 115 V 80 q 0,-10 10,-10 z"
+           id="path1703" />
+        <path
+           d="m 175,70 h 25 v 30 H 165 V 80 q 0,-10 10,-10 z"
+           id="path1705" />
+        <path
+           d="m 25,120 h 25 v 30 H 15 v -20 q 0,-10 10,-10 z"
+           id="path1707" />
+        <path
+           d="m 75,120 h 25 v 30 H 65 v -20 q 0,-10 10,-10 z"
+           id="path1709" />
+        <path
+           d="m 125,120 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path1711" />
+        <path
+           d="m 175,120 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path1713" />
+        <path
+           d="m 25,170 h 25 v 30 H 15 v -20 q 0,-10 10,-10 z"
+           id="path1715" />
+        <path
+           d="m 75,170 h 25 v 30 H 65 v -20 q 0,-10 10,-10 z"
+           id="path1717" />
+        <path
+           d="m 125,170 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path1719" />
+        <path
+           d="m 175,170 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path1721" />
+      </g>
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Waffle 5">
+    <g
+       id="g2264-81"
+       inkscape:label="Waffle 1"
+       transform="rotate(15,678.3443,2895.141)">
+      <g
+         transform="translate(11,11)"
+         id="g2190-9">
+        <rect
+           width="218"
+           height="218"
+           rx="25"
+           ry="25"
+           fill="#8b4513"
+           id="rect2188-6"
+           x="0"
+           y="0" />
+        <!-- Background rectangle -->
+      </g>
+      <g
+         transform="translate(15,15)"
+         id="g2194-0">
+        <rect
+           width="210"
+           height="210"
+           rx="20"
+           ry="20"
+           fill="url(#waffleGradient)"
+           id="rect2192-2"
+           x="0"
+           y="0"
+           style="fill:url(#linearGradient2268-6)" />
+      </g>
+      <g
+         fill="#d58a2f"
+         transform="translate(15,15)"
+         id="g2228-2">
+        <!-- Darker shade of the current color -->
+        <rect
+           x="10"
+           y="10"
+           width="40"
+           height="40"
+           id="rect2196-7" />
+        <rect
+           x="60"
+           y="10"
+           width="40"
+           height="40"
+           id="rect2198-2" />
+        <rect
+           x="110"
+           y="10"
+           width="40"
+           height="40"
+           id="rect2200-2" />
+        <rect
+           x="160"
+           y="10"
+           width="40"
+           height="40"
+           id="rect2202-5" />
+        <rect
+           x="10"
+           y="60"
+           width="40"
+           height="40"
+           id="rect2204-1" />
+        <rect
+           x="60"
+           y="60"
+           width="40"
+           height="40"
+           id="rect2206-8" />
+        <rect
+           x="110"
+           y="60"
+           width="40"
+           height="40"
+           id="rect2208-8" />
+        <rect
+           x="160"
+           y="60"
+           width="40"
+           height="40"
+           id="rect2210-8" />
+        <rect
+           x="10"
+           y="110"
+           width="40"
+           height="40"
+           id="rect2212-3" />
+        <rect
+           x="60"
+           y="110"
+           width="40"
+           height="40"
+           id="rect2214-4" />
+        <rect
+           x="110"
+           y="110"
+           width="40"
+           height="40"
+           id="rect2216-2" />
+        <rect
+           x="160"
+           y="110"
+           width="40"
+           height="40"
+           id="rect2218-5" />
+        <rect
+           x="10"
+           y="160"
+           width="40"
+           height="40"
+           id="rect2220-0" />
+        <rect
+           x="60"
+           y="160"
+           width="40"
+           height="40"
+           id="rect2222-0" />
+        <rect
+           x="110"
+           y="160"
+           width="40"
+           height="40"
+           id="rect2224-2" />
+        <rect
+           x="160"
+           y="160"
+           width="40"
+           height="40"
+           id="rect2226-5" />
+      </g>
+      <g
+         fill="#f49f2a"
+         transform="translate(15,15)"
+         id="g2262-0">
+        <!-- Original color for shadow effect -->
+        <path
+           d="M 30,20 H 50 V 50 H 15 V 30 Q 15,20 25,20 Z"
+           id="path2230-1" />
+        <path
+           d="m 75,20 h 25 V 50 H 65 V 30 Q 65,20 75,20 Z"
+           id="path2232-05" />
+        <path
+           d="m 125,20 h 25 V 50 H 115 V 30 q 0,-10 10,-10 z"
+           id="path2234-9" />
+        <path
+           d="m 175,20 h 25 V 50 H 165 V 30 q 0,-10 10,-10 z"
+           id="path2236-2" />
+        <path
+           d="m 25,70 h 25 v 30 H 15 V 80 Q 15,70 25,70 Z"
+           id="path2238-2" />
+        <path
+           d="m 75,70 h 25 v 30 H 65 V 80 Q 65,70 75,70 Z"
+           id="path2240-3" />
+        <path
+           d="m 125,70 h 25 v 30 H 115 V 80 q 0,-10 10,-10 z"
+           id="path2242-4" />
+        <path
+           d="m 175,70 h 25 v 30 H 165 V 80 q 0,-10 10,-10 z"
+           id="path2244-0" />
+        <path
+           d="m 25,120 h 25 v 30 H 15 v -20 q 0,-10 10,-10 z"
+           id="path2246-3" />
+        <path
+           d="m 75,120 h 25 v 30 H 65 v -20 q 0,-10 10,-10 z"
+           id="path2248-1" />
+        <path
+           d="m 125,120 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path2250-9" />
+        <path
+           d="m 175,120 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path2252-2" />
+        <path
+           d="m 25,170 h 25 v 30 H 15 v -20 q 0,-10 10,-10 z"
+           id="path2254-1" />
+        <path
+           d="m 75,170 h 25 v 30 H 65 v -20 q 0,-10 10,-10 z"
+           id="path2256-7" />
+        <path
+           d="m 125,170 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path2258-3" />
+        <path
+           d="m 175,170 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path2260-8" />
+      </g>
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="g3858"
+     inkscape:label="Waffle 5 copy"
+     transform="translate(0,1199.9998)">
+    <g
+       id="g3856"
+       inkscape:label="Waffle 1"
+       transform="rotate(15,678.3443,2895.141)">
+      <g
+         transform="translate(11,11)"
+         id="g3782">
+        <rect
+           width="218"
+           height="218"
+           rx="25"
+           ry="25"
+           fill="#8b4513"
+           id="rect3780"
+           x="0"
+           y="0" />
+        <!-- Background rectangle -->
+      </g>
+      <g
+         transform="translate(15,15)"
+         id="g3786">
+        <rect
+           width="210"
+           height="210"
+           rx="20"
+           ry="20"
+           fill="url(#waffleGradient)"
+           id="rect3784"
+           x="0"
+           y="0"
+           style="fill:url(#linearGradient3860)" />
+      </g>
+      <g
+         fill="#d58a2f"
+         transform="translate(15,15)"
+         id="g3820">
+        <!-- Darker shade of the current color -->
+        <rect
+           x="10"
+           y="10"
+           width="40"
+           height="40"
+           id="rect3788" />
+        <rect
+           x="60"
+           y="10"
+           width="40"
+           height="40"
+           id="rect3790" />
+        <rect
+           x="110"
+           y="10"
+           width="40"
+           height="40"
+           id="rect3792" />
+        <rect
+           x="160"
+           y="10"
+           width="40"
+           height="40"
+           id="rect3794" />
+        <rect
+           x="10"
+           y="60"
+           width="40"
+           height="40"
+           id="rect3796" />
+        <rect
+           x="60"
+           y="60"
+           width="40"
+           height="40"
+           id="rect3798" />
+        <rect
+           x="110"
+           y="60"
+           width="40"
+           height="40"
+           id="rect3800" />
+        <rect
+           x="160"
+           y="60"
+           width="40"
+           height="40"
+           id="rect3802" />
+        <rect
+           x="10"
+           y="110"
+           width="40"
+           height="40"
+           id="rect3804" />
+        <rect
+           x="60"
+           y="110"
+           width="40"
+           height="40"
+           id="rect3806" />
+        <rect
+           x="110"
+           y="110"
+           width="40"
+           height="40"
+           id="rect3808" />
+        <rect
+           x="160"
+           y="110"
+           width="40"
+           height="40"
+           id="rect3810" />
+        <rect
+           x="10"
+           y="160"
+           width="40"
+           height="40"
+           id="rect3812" />
+        <rect
+           x="60"
+           y="160"
+           width="40"
+           height="40"
+           id="rect3814" />
+        <rect
+           x="110"
+           y="160"
+           width="40"
+           height="40"
+           id="rect3816" />
+        <rect
+           x="160"
+           y="160"
+           width="40"
+           height="40"
+           id="rect3818" />
+      </g>
+      <g
+         fill="#f49f2a"
+         transform="translate(15,15)"
+         id="g3854">
+        <!-- Original color for shadow effect -->
+        <path
+           d="M 30,20 H 50 V 50 H 15 V 30 Q 15,20 25,20 Z"
+           id="path3822" />
+        <path
+           d="m 75,20 h 25 V 50 H 65 V 30 Q 65,20 75,20 Z"
+           id="path3824" />
+        <path
+           d="m 125,20 h 25 V 50 H 115 V 30 q 0,-10 10,-10 z"
+           id="path3826" />
+        <path
+           d="m 175,20 h 25 V 50 H 165 V 30 q 0,-10 10,-10 z"
+           id="path3828" />
+        <path
+           d="m 25,70 h 25 v 30 H 15 V 80 Q 15,70 25,70 Z"
+           id="path3830" />
+        <path
+           d="m 75,70 h 25 v 30 H 65 V 80 Q 65,70 75,70 Z"
+           id="path3832" />
+        <path
+           d="m 125,70 h 25 v 30 H 115 V 80 q 0,-10 10,-10 z"
+           id="path3834" />
+        <path
+           d="m 175,70 h 25 v 30 H 165 V 80 q 0,-10 10,-10 z"
+           id="path3836" />
+        <path
+           d="m 25,120 h 25 v 30 H 15 v -20 q 0,-10 10,-10 z"
+           id="path3838" />
+        <path
+           d="m 75,120 h 25 v 30 H 65 v -20 q 0,-10 10,-10 z"
+           id="path3840" />
+        <path
+           d="m 125,120 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path3842" />
+        <path
+           d="m 175,120 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path3844" />
+        <path
+           d="m 25,170 h 25 v 30 H 15 v -20 q 0,-10 10,-10 z"
+           id="path3846" />
+        <path
+           d="m 75,170 h 25 v 30 H 65 v -20 q 0,-10 10,-10 z"
+           id="path3848" />
+        <path
+           d="m 125,170 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path3850" />
+        <path
+           d="m 175,170 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path3852" />
+      </g>
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="g2266"
+     inkscape:label="Waffle 3"
+     transform="translate(660.99596,667.56252)">
+    <g
+       id="g2264"
+       inkscape:label="Waffle 1"
+       transform="rotate(-30,-610.20715,773.9619)">
+      <g
+         transform="translate(11,11)"
+         id="g2190">
+        <rect
+           width="218"
+           height="218"
+           rx="25"
+           ry="25"
+           fill="#8b4513"
+           id="rect2188"
+           x="0"
+           y="0" />
+        <!-- Background rectangle -->
+      </g>
+      <g
+         transform="translate(15,15)"
+         id="g2194">
+        <rect
+           width="210"
+           height="210"
+           rx="20"
+           ry="20"
+           fill="url(#waffleGradient)"
+           id="rect2192"
+           x="0"
+           y="0"
+           style="fill:url(#linearGradient2268)" />
+      </g>
+      <g
+         fill="#d58a2f"
+         transform="translate(15,15)"
+         id="g2228">
+        <!-- Darker shade of the current color -->
+        <rect
+           x="10"
+           y="10"
+           width="40"
+           height="40"
+           id="rect2196" />
+        <rect
+           x="60"
+           y="10"
+           width="40"
+           height="40"
+           id="rect2198" />
+        <rect
+           x="110"
+           y="10"
+           width="40"
+           height="40"
+           id="rect2200" />
+        <rect
+           x="160"
+           y="10"
+           width="40"
+           height="40"
+           id="rect2202" />
+        <rect
+           x="10"
+           y="60"
+           width="40"
+           height="40"
+           id="rect2204" />
+        <rect
+           x="60"
+           y="60"
+           width="40"
+           height="40"
+           id="rect2206" />
+        <rect
+           x="110"
+           y="60"
+           width="40"
+           height="40"
+           id="rect2208" />
+        <rect
+           x="160"
+           y="60"
+           width="40"
+           height="40"
+           id="rect2210" />
+        <rect
+           x="10"
+           y="110"
+           width="40"
+           height="40"
+           id="rect2212" />
+        <rect
+           x="60"
+           y="110"
+           width="40"
+           height="40"
+           id="rect2214" />
+        <rect
+           x="110"
+           y="110"
+           width="40"
+           height="40"
+           id="rect2216" />
+        <rect
+           x="160"
+           y="110"
+           width="40"
+           height="40"
+           id="rect2218" />
+        <rect
+           x="10"
+           y="160"
+           width="40"
+           height="40"
+           id="rect2220" />
+        <rect
+           x="60"
+           y="160"
+           width="40"
+           height="40"
+           id="rect2222" />
+        <rect
+           x="110"
+           y="160"
+           width="40"
+           height="40"
+           id="rect2224" />
+        <rect
+           x="160"
+           y="160"
+           width="40"
+           height="40"
+           id="rect2226" />
+      </g>
+      <g
+         fill="#f49f2a"
+         transform="translate(15,15)"
+         id="g2262">
+        <!-- Original color for shadow effect -->
+        <path
+           d="M 30,20 H 50 V 50 H 15 V 30 Q 15,20 25,20 Z"
+           id="path2230" />
+        <path
+           d="m 75,20 h 25 V 50 H 65 V 30 Q 65,20 75,20 Z"
+           id="path2232" />
+        <path
+           d="m 125,20 h 25 V 50 H 115 V 30 q 0,-10 10,-10 z"
+           id="path2234" />
+        <path
+           d="m 175,20 h 25 V 50 H 165 V 30 q 0,-10 10,-10 z"
+           id="path2236" />
+        <path
+           d="m 25,70 h 25 v 30 H 15 V 80 Q 15,70 25,70 Z"
+           id="path2238" />
+        <path
+           d="m 75,70 h 25 v 30 H 65 V 80 Q 65,70 75,70 Z"
+           id="path2240" />
+        <path
+           d="m 125,70 h 25 v 30 H 115 V 80 q 0,-10 10,-10 z"
+           id="path2242" />
+        <path
+           d="m 175,70 h 25 v 30 H 165 V 80 q 0,-10 10,-10 z"
+           id="path2244" />
+        <path
+           d="m 25,120 h 25 v 30 H 15 v -20 q 0,-10 10,-10 z"
+           id="path2246" />
+        <path
+           d="m 75,120 h 25 v 30 H 65 v -20 q 0,-10 10,-10 z"
+           id="path2248" />
+        <path
+           d="m 125,120 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path2250" />
+        <path
+           d="m 175,120 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path2252" />
+        <path
+           d="m 25,170 h 25 v 30 H 15 v -20 q 0,-10 10,-10 z"
+           id="path2254" />
+        <path
+           d="m 75,170 h 25 v 30 H 65 v -20 q 0,-10 10,-10 z"
+           id="path2256" />
+        <path
+           d="m 125,170 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path2258" />
+        <path
+           d="m 175,170 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path2260" />
+      </g>
+    </g>
+    <g
+       id="g2264-0"
+       inkscape:label="Waffle 1"
+       transform="rotate(-15,-1130.5346,-143.29472)">
+      <g
+         transform="translate(11,11)"
+         id="g2190-6">
+        <rect
+           width="218"
+           height="218"
+           rx="25"
+           ry="25"
+           fill="#8b4513"
+           id="rect2188-2"
+           x="0"
+           y="0" />
+        <!-- Background rectangle -->
+      </g>
+      <g
+         transform="translate(15,15)"
+         id="g2194-3">
+        <rect
+           width="210"
+           height="210"
+           rx="20"
+           ry="20"
+           fill="url(#waffleGradient)"
+           id="rect2192-4"
+           x="0"
+           y="0"
+           style="fill:url(#linearGradient2268-61)" />
+      </g>
+      <g
+         fill="#d58a2f"
+         transform="translate(15,15)"
+         id="g2228-16">
+        <!-- Darker shade of the current color -->
+        <rect
+           x="10"
+           y="10"
+           width="40"
+           height="40"
+           id="rect2196-3" />
+        <rect
+           x="60"
+           y="10"
+           width="40"
+           height="40"
+           id="rect2198-8" />
+        <rect
+           x="110"
+           y="10"
+           width="40"
+           height="40"
+           id="rect2200-1" />
+        <rect
+           x="160"
+           y="10"
+           width="40"
+           height="40"
+           id="rect2202-0" />
+        <rect
+           x="10"
+           y="60"
+           width="40"
+           height="40"
+           id="rect2204-4" />
+        <rect
+           x="60"
+           y="60"
+           width="40"
+           height="40"
+           id="rect2206-2" />
+        <rect
+           x="110"
+           y="60"
+           width="40"
+           height="40"
+           id="rect2208-51" />
+        <rect
+           x="160"
+           y="60"
+           width="40"
+           height="40"
+           id="rect2210-0" />
+        <rect
+           x="10"
+           y="110"
+           width="40"
+           height="40"
+           id="rect2212-4" />
+        <rect
+           x="60"
+           y="110"
+           width="40"
+           height="40"
+           id="rect2214-0" />
+        <rect
+           x="110"
+           y="110"
+           width="40"
+           height="40"
+           id="rect2216-3" />
+        <rect
+           x="160"
+           y="110"
+           width="40"
+           height="40"
+           id="rect2218-4" />
+        <rect
+           x="10"
+           y="160"
+           width="40"
+           height="40"
+           id="rect2220-9" />
+        <rect
+           x="60"
+           y="160"
+           width="40"
+           height="40"
+           id="rect2222-5" />
+        <rect
+           x="110"
+           y="160"
+           width="40"
+           height="40"
+           id="rect2224-1" />
+        <rect
+           x="160"
+           y="160"
+           width="40"
+           height="40"
+           id="rect2226-9" />
+      </g>
+      <g
+         fill="#f49f2a"
+         transform="translate(15,15)"
+         id="g2262-3">
+        <!-- Original color for shadow effect -->
+        <path
+           d="M 30,20 H 50 V 50 H 15 V 30 Q 15,20 25,20 Z"
+           id="path2230-8" />
+        <path
+           d="m 75,20 h 25 V 50 H 65 V 30 Q 65,20 75,20 Z"
+           id="path2232-056" />
+        <path
+           d="m 125,20 h 25 V 50 H 115 V 30 q 0,-10 10,-10 z"
+           id="path2234-7" />
+        <path
+           d="m 175,20 h 25 V 50 H 165 V 30 q 0,-10 10,-10 z"
+           id="path2236-8" />
+        <path
+           d="m 25,70 h 25 v 30 H 15 V 80 Q 15,70 25,70 Z"
+           id="path2238-1" />
+        <path
+           d="m 75,70 h 25 v 30 H 65 V 80 Q 65,70 75,70 Z"
+           id="path2240-7" />
+        <path
+           d="m 125,70 h 25 v 30 H 115 V 80 q 0,-10 10,-10 z"
+           id="path2242-1" />
+        <path
+           d="m 175,70 h 25 v 30 H 165 V 80 q 0,-10 10,-10 z"
+           id="path2244-3" />
+        <path
+           d="m 25,120 h 25 v 30 H 15 v -20 q 0,-10 10,-10 z"
+           id="path2246-9" />
+        <path
+           d="m 75,120 h 25 v 30 H 65 v -20 q 0,-10 10,-10 z"
+           id="path2248-3" />
+        <path
+           d="m 125,120 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path2250-1" />
+        <path
+           d="m 175,120 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path2252-8" />
+        <path
+           d="m 25,170 h 25 v 30 H 15 v -20 q 0,-10 10,-10 z"
+           id="path2254-6" />
+        <path
+           d="m 75,170 h 25 v 30 H 65 v -20 q 0,-10 10,-10 z"
+           id="path2256-73" />
+        <path
+           d="m 125,170 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path2258-8" />
+        <path
+           d="m 175,170 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path2260-86" />
+      </g>
+    </g>
+    <g
+       id="g2264-8"
+       inkscape:label="Waffle 1"
+       transform="translate(-181.06616,115.34705)">
+      <g
+         transform="translate(11,11)"
+         id="g2190-8">
+        <rect
+           width="218"
+           height="218"
+           rx="25"
+           ry="25"
+           fill="#8b4513"
+           id="rect2188-5"
+           x="0"
+           y="0" />
+        <!-- Background rectangle -->
+      </g>
+      <g
+         transform="translate(15,15)"
+         id="g2194-5">
+        <rect
+           width="210"
+           height="210"
+           rx="20"
+           ry="20"
+           fill="url(#waffleGradient)"
+           id="rect2192-6"
+           x="0"
+           y="0"
+           style="fill:url(#linearGradient2268-8)" />
+      </g>
+      <g
+         fill="#d58a2f"
+         transform="translate(15,15)"
+         id="g2228-1">
+        <!-- Darker shade of the current color -->
+        <rect
+           x="10"
+           y="10"
+           width="40"
+           height="40"
+           id="rect2196-5" />
+        <rect
+           x="60"
+           y="10"
+           width="40"
+           height="40"
+           id="rect2198-9" />
+        <rect
+           x="110"
+           y="10"
+           width="40"
+           height="40"
+           id="rect2200-9" />
+        <rect
+           x="160"
+           y="10"
+           width="40"
+           height="40"
+           id="rect2202-2" />
+        <rect
+           x="10"
+           y="60"
+           width="40"
+           height="40"
+           id="rect2204-3" />
+        <rect
+           x="60"
+           y="60"
+           width="40"
+           height="40"
+           id="rect2206-6" />
+        <rect
+           x="110"
+           y="60"
+           width="40"
+           height="40"
+           id="rect2208-5" />
+        <rect
+           x="160"
+           y="60"
+           width="40"
+           height="40"
+           id="rect2210-7" />
+        <rect
+           x="10"
+           y="110"
+           width="40"
+           height="40"
+           id="rect2212-1" />
+        <rect
+           x="60"
+           y="110"
+           width="40"
+           height="40"
+           id="rect2214-6" />
+        <rect
+           x="110"
+           y="110"
+           width="40"
+           height="40"
+           id="rect2216-5" />
+        <rect
+           x="160"
+           y="110"
+           width="40"
+           height="40"
+           id="rect2218-3" />
+        <rect
+           x="10"
+           y="160"
+           width="40"
+           height="40"
+           id="rect2220-3" />
+        <rect
+           x="60"
+           y="160"
+           width="40"
+           height="40"
+           id="rect2222-3" />
+        <rect
+           x="110"
+           y="160"
+           width="40"
+           height="40"
+           id="rect2224-8" />
+        <rect
+           x="160"
+           y="160"
+           width="40"
+           height="40"
+           id="rect2226-2" />
+      </g>
+      <g
+         fill="#f49f2a"
+         transform="translate(15,15)"
+         id="g2262-6">
+        <!-- Original color for shadow effect -->
+        <path
+           d="M 30,20 H 50 V 50 H 15 V 30 Q 15,20 25,20 Z"
+           id="path2230-6" />
+        <path
+           d="m 75,20 h 25 V 50 H 65 V 30 Q 65,20 75,20 Z"
+           id="path2232-0" />
+        <path
+           d="m 125,20 h 25 V 50 H 115 V 30 q 0,-10 10,-10 z"
+           id="path2234-0" />
+        <path
+           d="m 175,20 h 25 V 50 H 165 V 30 q 0,-10 10,-10 z"
+           id="path2236-9" />
+        <path
+           d="m 25,70 h 25 v 30 H 15 V 80 Q 15,70 25,70 Z"
+           id="path2238-6" />
+        <path
+           d="m 75,70 h 25 v 30 H 65 V 80 Q 65,70 75,70 Z"
+           id="path2240-5" />
+        <path
+           d="m 125,70 h 25 v 30 H 115 V 80 q 0,-10 10,-10 z"
+           id="path2242-0" />
+        <path
+           d="m 175,70 h 25 v 30 H 165 V 80 q 0,-10 10,-10 z"
+           id="path2244-2" />
+        <path
+           d="m 25,120 h 25 v 30 H 15 v -20 q 0,-10 10,-10 z"
+           id="path2246-0" />
+        <path
+           d="m 75,120 h 25 v 30 H 65 v -20 q 0,-10 10,-10 z"
+           id="path2248-9" />
+        <path
+           d="m 125,120 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path2250-7" />
+        <path
+           d="m 175,120 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path2252-7" />
+        <path
+           d="m 25,170 h 25 v 30 H 15 v -20 q 0,-10 10,-10 z"
+           id="path2254-8" />
+        <path
+           d="m 75,170 h 25 v 30 H 65 v -20 q 0,-10 10,-10 z"
+           id="path2256-6" />
+        <path
+           d="m 125,170 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path2258-7" />
+        <path
+           d="m 175,170 h 25 v 30 h -35 v -20 q 0,-10 10,-10 z"
+           id="path2260-1" />
+      </g>
+    </g>
+  </g>
+</svg>
