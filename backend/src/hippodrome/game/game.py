@@ -23,9 +23,6 @@ from hippodrome.data_collection import save
 # Abstracting the Game Class is a WIP so that future games can be added
 class Game(BaseModel):
     """Base class for all games."""
-    # Allow Abritrary types in the model config
-    class Config:
-        arbitrary_types_allowed = True
 
     # Required
     game_id: str
@@ -44,7 +41,7 @@ class Game(BaseModel):
     """Whether the game is currently awaiting input from a player."""
     messages: List[Message] = Field(default_factory=list)
     """The messages sent during the game."""
-    message_queue: any = Field(default_factory=asyncio.Queue, exclude=True)
+    message_queue: List[Message] = asyncio.Queue()
     """A queue of messages to be sent during the game, these are relayed to the players as they are added."""
 
     # Class Variables
@@ -103,7 +100,7 @@ class Game(BaseModel):
 
         agent_message = AgentMessage.from_message(message, recipient_ids, self.game_id)
 
-        await self.add_message(agent_message)
+        self.add_message(agent_message)
 
     async def verbose_message(self, content: str, **kwargs):
         """
@@ -112,7 +109,7 @@ class Game(BaseModel):
 
         Ex: "Abby is thinking..."
         """
-        await self.game_message(content, **kwargs, message_type="verbose")
+        self.game_message(content, **kwargs, message_type="verbose")
 
     async def debug_message(self, content: str, **kwargs):
         """
@@ -123,22 +120,27 @@ class Game(BaseModel):
         """
         await self.game_message(content, **kwargs, message_type="debug")
 
-
     # WIP
-    async def player_response(self, message: Message, output_format: Type[OutputFormatModel] = None):
+    async def get_player_response(
+        self, message: Message, output_format: Type[OutputFormatModel] = None
+    ):
         """
-        Sends a message to a player and waits for a response.
+        Sends a game message to a player (or list of players) and waits for a response from each of them.
         The response is then saved and returned.
         """
         # Add the message to the game history
-        await self.add_message(message)
+        self.add_message(message)
 
         # For each recipient, generate a response
         for player_id in message.recipients:
             player = self.player_from_id(player_id)
 
             # Filter messages to only include messages sent by or to the player
-            player_messages = [m for m in self.messages if message.sender == player_id or player_id in message.recipients]
+            player_messages = [
+                m
+                for m in self.messages
+                if message.sender == player_id or player_id in message.recipients
+            ]
 
             if player.controller.is_ai:
                 # If the player is an AI, format the messages appropriately
@@ -151,15 +153,13 @@ class Game(BaseModel):
 
             # Add the response to the game history
             if new_message is not None:
-                await self.add_message(new_message)
+                self.add_message(new_message)
 
-
-    async def add_message(self, message: Message):
+    def add_message(self, message: Message):
         """Adds a message to the game history."""
-        self.messages.append(message)
-        await self.message_queue.put(message)
-        save(message)
 
+        self.messages.append(message)
+        save(message)
 
     async def run_game(self):
         """Runs the game."""

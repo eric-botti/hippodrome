@@ -1,6 +1,5 @@
+from backend.examples.chameleon.chameleon_game import ChameleonGame
 import asyncio
-
-from game_chameleon import ChameleonGame
 
 
 def main():
@@ -9,7 +8,7 @@ def main():
 
     game = ChameleonGame.from_human_name(name)
 
-    asyncio.create_task(game.run_game())
+    asyncio.run(game.run_game())
 
 
 if __name__ == "__main__":
