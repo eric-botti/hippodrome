@@ -37,43 +37,46 @@ export default function ChatWindow({ messages, setMessages }) {
 
 
   return (
-    <div className="flex flex-col h-screen lg:max-w-screen-md mx-auto">
-      <h1 className="text-3xl font-bold text-center mt-10">for breakfast</h1>
-      <div className="flex-1 overflow-auto p-4">
-        <ScrollArea className="h-full">
-          <div className="grid gap-4">
-            {messages.map((message) => (
-              <ChatMessage key={message.id} message={message} />
-            ))}
-          </div>
-        </ScrollArea>
-      </div>
-      <div className="bg-background border-t px-4 py-3">
-        <div className="relative">
-          <Textarea
-            placeholder="Type your message..."
-            value={newMessage}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                e.preventDefault();
-                handleSendMessage();
-              }
-            }}
-            onChange={(e) => setNewMessage(e.target.value)}
-            className="min-h-[48px] rounded-2xl resize-none p-4 border border-neutral-400 shadow-sm pr-16"
-          />
-          <Button
-            type="button"
-            size="icon"
-            className="absolute w-8 h-8 top-3 right-3"
-            onClick={handleSendMessage}
-          >
-            <ArrowUpIcon className="w-4 h-4" />
-            <span className="sr-only">Send</span>
-          </Button>
+<div className="h-screen lg:py-20">
+  <div className="flex flex-col h-full lg:max-w-screen-md mx-auto my-50 bg-background rounded-lg shadow-lg">
+    <h1 className="text-3xl font-bold text-center mt-10">for breakfast</h1>
+    <div className="flex-1 overflow-auto p-4">
+      <ScrollArea className="h-full px-5">
+        <div className="grid gap-4">
+          {messages.map((message) => (
+            <ChatMessage key={message.id} message={message} />
+          ))}
         </div>
+      </ScrollArea>
+    </div>
+  <div className="bg-background border-t px-4 py-3">
+    <div className="relative">
+      <Textarea
+        placeholder="Type your message..."
+        value={newMessage}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            handleSendMessage();
+          }
+        }}
+        onChange={(e) => setNewMessage(e.target.value)}
+        className="min-h-[48px] rounded-2xl resize-none p-4 border border-neutral-400 shadow-sm pr-16"
+      />
+        <Button
+          type="button"
+          size="icon"
+          className="absolute w-8 h-8 top-3 right-3"
+          onClick={handleSendMessage}
+        >
+          <ArrowUpIcon className="w-4 h-4" />
+          <span className="sr-only">Send</span>
+        </Button>
       </div>
     </div>
+  </div>
+</div>
+
   );
 }
 

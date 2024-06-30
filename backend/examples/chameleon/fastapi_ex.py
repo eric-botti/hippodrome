@@ -3,6 +3,8 @@ import json
 import logging
 import random
 
+import asyncio
+
 from fastapi import FastAPI, WebSocket
 from fastapi.responses import HTMLResponse
 
@@ -55,7 +57,7 @@ async def websocket_endpoint(websocket: WebSocket):
             game = ChameleonGame.from_human_name(user_input, FastAPIHumanController)
             user_input = None
 
-        game.run_game()
+        await game.run_game()
 
         for message in game.messages[last_round_id : player_message.id]:
             for recipient in message.recipients:

@@ -35,6 +35,8 @@
     --ring: 215 20.2% 65.1%;
 
     --radius: 0.5rem;
+
+    --waffle-size: 35rem
 }
 
 
@@ -53,4 +55,23 @@ body {
   
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-inter), sans-serif;
+}
+
+
+
+body {
+    background-color: #add8e6; /* Light blue background */
+    background-image: url('waffle_pattern.svg'); /* Path to your waffle SVG */
+    background-repeat: repeat;
+    background-size: var(--waffle-size); /* Adjust the size as needed */
+    animation: moveBackground 20s infinite linear;
+}
+
+@keyframes moveBackground {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 var(--waffle-size); /* Adjust to control the speed and direction */
+    }
 }

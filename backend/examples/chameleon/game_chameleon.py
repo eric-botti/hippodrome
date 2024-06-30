@@ -115,7 +115,7 @@ class ChameleonGame(Game):
         """Returns the current herd vote tally."""
         return self.herd_vote_tallies[-1]
 
-    def run_game(self):
+    async def run_game(self):
         """Starts the game."""
 
         # Check if the game has not been won

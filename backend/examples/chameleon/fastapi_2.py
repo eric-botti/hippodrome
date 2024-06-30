@@ -1,41 +1,45 @@
-# main.py
-
 import asyncio
-import random
 from fastapi import FastAPI, WebSocket
 from fastapi.responses import HTMLResponse
 
 app = FastAPI()
 
-# Create asyncio Queue for messages
-message_queue = asyncio.Queue()
+# GameSimulator class
+class GameSimulator:
+    def __init__(self, message_queue):
+        self.message_queue = message_queue
+
+    async def run(self):
+        for i in range(5):
+            print(f"Sending message {i + 1}/5")
+            message = f"Message {i + 1} from GameSimulator"
+            await self.message_queue.put(message)
+            await asyncio.sleep(2 + i)  # Vary sleep time for demonstration
 
 
 # WebSocket endpoint
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
-    while True:
-        await asyncio.sleep(5)
-        if random.random() < 0.3:
-            await add_message("Hello!")
 
+    # Create asyncio Queue for messages
+    print("Creating message queue")
+    message_queue = asyncio.Queue()
+
+    # Create an instance of GameSimulator
+    print("Creating GameSimulator")
+    game_simulator = GameSimulator(message_queue)
+
+    # Start the game simulator loop
+    print("Starting game simulator loop")
+    asyncio.create_task(game_simulator.run())
+
+    while True:
         # Check if there are new messages in the queue
         if not message_queue.empty():
+
             message = await message_queue.get()
             await websocket.send_text(message)
-
-
-# Function to add messages to the queue
-async def add_message(message):
-    await message_queue.put(message)
-
-
-# Example HTTP endpoint to add messages
-@app.post("/add_message/{message}")
-async def add_message_endpoint(message: str):
-    await add_message(message)
-    return {"status": "Message added to queue"}
 
 
 # Example HTML endpoint to view the WebSocket client

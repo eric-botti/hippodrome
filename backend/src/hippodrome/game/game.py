@@ -23,6 +23,9 @@ from hippodrome.data_collection import save
 # Abstracting the Game Class is a WIP so that future games can be added
 class Game(BaseModel):
     """Base class for all games."""
+    # Allow Abritrary types in the model config
+    class Config:
+        arbitrary_types_allowed = True
 
     # Required
     game_id: str
@@ -41,7 +44,7 @@ class Game(BaseModel):
     """Whether the game is currently awaiting input from a player."""
     messages: List[Message] = Field(default_factory=list)
     """The messages sent during the game."""
-    message_queue: List[Message] = asyncio.Queue()
+    message_queue: any = Field(default_factory=asyncio.Queue, exclude=True)
     """A queue of messages to be sent during the game, these are relayed to the players as they are added."""
 
     # Class Variables
@@ -63,7 +66,7 @@ class Game(BaseModel):
             None,
         )
 
-    def game_message(
+    async def game_message(
         self,
         content: str,
         recipient: (
@@ -100,35 +103,35 @@ class Game(BaseModel):
 
         agent_message = AgentMessage.from_message(message, recipient_ids, self.game_id)
 
-        self.add_message(agent_message)
+        await self.add_message(agent_message)
 
-    def verbose_message(self, content: str, **kwargs):
+    async def verbose_message(self, content: str, **kwargs):
         """
         Sends a verbose message to all players capable of receiving them.
         Verbose messages are used to communicate in real time what is happening that cannot be seen publicly.
 
         Ex: "Abby is thinking..."
         """
-        self.game_message(content, **kwargs, message_type="verbose")
+        await self.game_message(content, **kwargs, message_type="verbose")
 
-    def debug_message(self, content: str, **kwargs):
+    async def debug_message(self, content: str, **kwargs):
         """
         Sends a debug message to all players capable of receiving them.
         Debug messages usually contain secret information and should only be sent when it wouldn't spoil the game.
 
         Ex: "Abby is the chameleon."
         """
-        self.game_message(content, **kwargs, message_type="debug")
+        await self.game_message(content, **kwargs, message_type="debug")
 
 
     # WIP
-    def player_response(self, message: Message, output_format: Type[OutputFormatModel] = None):
+    async def player_response(self, message: Message, output_format: Type[OutputFormatModel] = None):
         """
         Sends a message to a player and waits for a response.
         The response is then saved and returned.
         """
         # Add the message to the game history
-        self.add_message(message)
+        await self.add_message(message)
 
         # For each recipient, generate a response
         for player_id in message.recipients:
@@ -148,17 +151,17 @@ class Game(BaseModel):
 
             # Add the response to the game history
             if new_message is not None:
-                self.add_message(new_message)
+                await self.add_message(new_message)
 
 
-    def add_message(self, message: Message):
+    async def add_message(self, message: Message):
         """Adds a message to the game history."""
-
         self.messages.append(message)
+        await self.message_queue.put(message)
         save(message)
 
 
-    def run_game(self):
+    async def run_game(self):
         """Runs the game."""
         raise NotImplementedError(
             "The run_game method must be implemented by the subclass."
