@@ -63,7 +63,7 @@ class Game(BaseModel):
             None,
         )
 
-    def game_message(
+    async def game_message(
         self,
         content: str,
         recipient: (
@@ -102,7 +102,7 @@ class Game(BaseModel):
 
         self.add_message(agent_message)
 
-    def verbose_message(self, content: str, **kwargs):
+    async def verbose_message(self, content: str, **kwargs):
         """
         Sends a verbose message to all players capable of receiving them.
         Verbose messages are used to communicate in real time what is happening that cannot be seen publicly.
@@ -111,20 +111,21 @@ class Game(BaseModel):
         """
         self.game_message(content, **kwargs, message_type="verbose")
 
-    def debug_message(self, content: str, **kwargs):
+    async def debug_message(self, content: str, **kwargs):
         """
         Sends a debug message to all players capable of receiving them.
         Debug messages usually contain secret information and should only be sent when it wouldn't spoil the game.
 
         Ex: "Abby is the chameleon."
         """
-        self.game_message(content, **kwargs, message_type="debug")
-
+        await self.game_message(content, **kwargs, message_type="debug")
 
     # WIP
-    def player_response(self, message: Message, output_format: Type[OutputFormatModel] = None):
+    async def get_player_response(
+        self, message: Message, output_format: Type[OutputFormatModel] = None
+    ):
         """
-        Sends a message to a player and waits for a response.
+        Sends a game message to a player (or list of players) and waits for a response from each of them.
         The response is then saved and returned.
         """
         # Add the message to the game history
@@ -135,7 +136,11 @@ class Game(BaseModel):
             player = self.player_from_id(player_id)
 
             # Filter messages to only include messages sent by or to the player
-            player_messages = [m for m in self.messages if message.sender == player_id or player_id in message.recipients]
+            player_messages = [
+                m
+                for m in self.messages
+                if message.sender == player_id or player_id in message.recipients
+            ]
 
             if player.controller.is_ai:
                 # If the player is an AI, format the messages appropriately
@@ -150,15 +155,13 @@ class Game(BaseModel):
             if new_message is not None:
                 self.add_message(new_message)
 
-
     def add_message(self, message: Message):
         """Adds a message to the game history."""
 
         self.messages.append(message)
         save(message)
 
-
-    def run_game(self):
+    async def run_game(self):
         """Runs the game."""
         raise NotImplementedError(
             "The run_game method must be implemented by the subclass."

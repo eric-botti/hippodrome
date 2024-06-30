@@ -4,58 +4,64 @@ from typing import ClassVar, List, Type
 
 from hippodrome.game.utils import random_index
 from chameleon_player import ChameleonPlayer
+from chameleon_data_models import (
+    AnimalDescriptionFormat,
+    ChameleonGuessFormat,
+    HerdVoteFormat,
+)
+
 from prompts import fetch_prompt, format_prompt
 
 from hippodrome import Game, Player, Message
-from hippodrome.output_formats import OutputFormatModel
 
 from pydantic import Field, field_validator, model_validator
 
 # Default Values
 NUMBER_OF_PLAYERS = 6
 WINNING_SCORE = 7
-AVAILABLE_ANIMALS = ["Dog", "Cat", "Mouse", "Hamster", "Monkey", "Rabbit", "Fox", "Bear", "Panda", "Koala", "Tiger",
-                     "Lion", "Cow", "Pig", "Frog", "Owl", "Duck", "Chicken", "Butterfly", "Turtle", "Snake", "Octopus",
-                     "Squid", "Hedgehog", "Elephant", "Rhinoceros", "Zebra", "Crocodile", "Whale", "Dolphin", "Camel",
-                     "Giraffe", "Deer", "Gorilla", "Goat", "Llama", "Horse", "Unicorn", "Flamingo", "Skunk", "Shark"]
-
-
-
-class AnimalDescriptionFormat(OutputFormatModel):
-    # Define fields of our class here
-    description: str = Field(description="A brief description of the animal")
-    """A brief description of the animal"""
-
-    @field_validator('description')
-    @classmethod
-    def check_starting_character(cls, v) -> str:
-        if not v[0].upper() == 'I':
-            raise ValueError("Please rewrite your description so that it begins with 'I'")
-        return v
-
-
-class ChameleonGuessFormat(OutputFormatModel):
-    animal: str = Field(description="Name of the animal you think the Herd is in its singular form, e.g. 'animal' not 'animals'")
-
-    @field_validator('animal')
-    @classmethod
-    def is_one_word(cls, v) -> str:
-        if len(v.split()) > 1:
-            raise ValueError("Animal's name must be one word")
-        return v
-
-
-class HerdVoteFormat(OutputFormatModel):
-    player_names: List[str] = Field([], exclude=True)
-    """The names of the players in the game"""
-    vote: str = Field(description="The name of the player you are voting for")
-    """The name of the player you are voting for"""
-
-    @model_validator(mode="after")
-    def check_player_exists(self) -> "HerdVoteFormat":
-        if self.vote.lower() not in [player.lower() for player in self.player_names]:
-            raise ValueError(f"Player {self.vote} does not exist, please vote for one of {self.player_names}")
-        return self
+AVAILABLE_ANIMALS = [
+    "Dog",
+    "Cat",
+    "Mouse",
+    "Hamster",
+    "Monkey",
+    "Rabbit",
+    "Fox",
+    "Bear",
+    "Panda",
+    "Koala",
+    "Tiger",
+    "Lion",
+    "Cow",
+    "Pig",
+    "Frog",
+    "Owl",
+    "Duck",
+    "Chicken",
+    "Butterfly",
+    "Turtle",
+    "Snake",
+    "Octopus",
+    "Squid",
+    "Hedgehog",
+    "Elephant",
+    "Rhinoceros",
+    "Zebra",
+    "Crocodile",
+    "Whale",
+    "Dolphin",
+    "Camel",
+    "Giraffe",
+    "Deer",
+    "Gorilla",
+    "Goat",
+    "Llama",
+    "Horse",
+    "Unicorn",
+    "Flamingo",
+    "Skunk",
+    "Shark",
+]
 
 
 class ChameleonGame(Game):
@@ -115,21 +121,27 @@ class ChameleonGame(Game):
         """Returns the current herd vote tally."""
         return self.herd_vote_tallies[-1]
 
-    def run_game(self):
+    async def run_game(self):
         """Starts the game."""
 
         # Check if the game has not been won
         if self.game_state != "game_end":
             if self.game_state == "game_start":
-                self.game_message(fetch_prompt("game_rules"), message_type="system")
+                await self.game_message(
+                    fetch_prompt("game_rules"), message_type="system"
+                )
                 self.game_state = "setup_round"
             if self.game_state == "setup_round":
-                self.setup_round()
+                await self.setup_round()
                 self.game_state = "animal_description"
-            if self.game_state in ["animal_description", "chameleon_guess", "herd_vote"]:
-                self.run_round()
+            if self.game_state in [
+                "animal_description",
+                "chameleon_guess",
+                "herd_vote",
+            ]:
+                await self.run_round()
             if self.game_state == "resolve_round":
-                self.resolve_round()
+                await self.resolve_round()
 
                 points = [player.points for player in self.players]
 
@@ -137,27 +149,31 @@ class ChameleonGame(Game):
                     self.game_state = "game_end"
                     self.winner_id = self.players[points.index(max(points))].player_id
                     winner = self.player_from_id(self.winner_id)
-                    self.game_message(f"The game is over {winner.name} has won!")
+                    await self.game_message(f"The game is over {winner.name} has won!")
                     self.end_game()
 
                 else:
                     self.game_state = "setup_round"
                     # Go back to start
-                    self.game_message(f"No player has won yet, the game will end when a player reaches {self.winning_score} points.")
-                    self.game_message(f"Starting a new round...")
+                    await self.game_message(
+                        f"No player has won yet, the game will end when a player reaches {self.winning_score} points."
+                    )
+                    await self.game_message(f"Starting a new round...")
                     random.shuffle(self.players)
-                    self.run_game()
+                    await self.run_game()
 
-    def run_round(self):
+    async def run_round(self):
         """Starts the round."""
 
         # Phase I: Collect Player Animal Descriptions
         if self.game_state == "animal_description":
             for current_player in self.players:
-                if current_player.player_id not in [animal_description['player_id'] for animal_description in
-                                                    self.round_animal_descriptions]:
+                if current_player.player_id not in [
+                    animal_description["player_id"]
+                    for animal_description in self.round_animal_descriptions
+                ]:
 
-                    response = self.player_turn_animal_description(current_player)
+                    response = await self.player_turn_animal_description(current_player)
 
                     if not response:
                         break
@@ -167,17 +183,18 @@ class ChameleonGame(Game):
 
         # Phase II: Chameleon Guesses the Animal
         if self.game_state == "chameleon_guess":
-            self.player_turn_chameleon_guess(self.chameleon)
+            await self.player_turn_chameleon_guess(self.chameleon)
 
         # Phase III: The Herd Votes for who they think the Chameleon is
         if self.game_state == "herd_vote":
             if not self.awaiting_input:
                 self.verbose_message("The Herd is voting...")
             for current_player in self.players:
-                if current_player.role == "herd" and current_player.player_id not in [vote['voter_id'] for vote in
-                                                                                      self.herd_vote_tally]:
+                if current_player.role == "herd" and current_player.player_id not in [
+                    vote["voter_id"] for vote in self.herd_vote_tally
+                ]:
 
-                    response = self.player_turn_herd_vote(current_player)
+                    response = await self.player_turn_herd_vote(current_player)
 
                     if not response:
                         break
@@ -185,12 +202,11 @@ class ChameleonGame(Game):
             if len(self.herd_vote_tally) == len(self.players) - 1:
                 self.game_state = "resolve_round"
 
-    def setup_round(self):
+    async def setup_round(self):
         """Sets up the round. This includes assigning roles and gathering player names."""
         # Choose Animal
         herd_animal = self.random_animal()
         self.herd_animals.append(herd_animal)
-        self.debug_message(f"The secret animal is {herd_animal}.")
 
         # Assign Roles
         chameleon_index = random_index(len(self.players))
@@ -198,23 +214,23 @@ class ChameleonGame(Game):
 
         self.chameleon_ids.append(chameleon.player_id)
 
-        self.game_message(fetch_prompt("assign_chameleon"), chameleon)
+        await self.game_message(fetch_prompt("assign_chameleon"), chameleon)
 
         herd = []
         for i, player in enumerate(self.players):
             if i == chameleon_index:
                 player.assign_role("chameleon")
-                self.debug_message(f"{player.name} is the Chameleon!")
             else:
                 player.assign_role("herd")
                 herd.append(player)
 
-        self.game_message(format_prompt("assign_herd", herd_animal=herd_animal), herd)
+        await self.game_message(
+            format_prompt("assign_herd", herd_animal=herd_animal), herd
+        )
 
         for i, player in enumerate(self.players):
             if i == chameleon_index:
                 player.assign_role("chameleon")
-                self.debug_message(f"{player.name} is the Chameleon!")
             else:
                 player.assign_role("herd")
 
@@ -224,66 +240,100 @@ class ChameleonGame(Game):
         # Empty Tally for Votes
         self.herd_vote_tallies.append([])
 
-        self.game_message(f"Each player will now take turns describing themselves:")
+        await self.game_message(
+            f"Each player will now take turns describing themselves:"
+        )
 
-    def player_turn_animal_description(self, player: Player):
+    async def player_turn_animal_description(self, player: Player):
         """Handles a player's turn to describe themselves."""
         if not self.awaiting_input:
-            self.verbose_message(f"{player.name} is thinking...", recipient=player, exclude=True)
-            # self.game_message(fetch_prompt("player_describe_animal"), player)
-            self.game_message(format_prompt("player_describe_animal"), player)
+            self.verbose_message(
+                f"{player.name} is thinking...", recipient=player, exclude=True
+            )
+            # await self.game_message(fetch_prompt("player_describe_animal"), player)
+            await self.game_message(format_prompt("player_describe_animal"), player)
             # message = Message(sender="game", type="prompt", content=fetch_prompt("player_describe_animal"), recipients=[player.player_id])
             # self.player_response(message)
 
         # Get Player Animal Description
-        response = player.controller.generate_formatted_response(AnimalDescriptionFormat)
+        response = player.controller.generate_formatted_response(
+            AnimalDescriptionFormat
+        )
 
         if response:
-            self.round_animal_descriptions.append({"player_id": player.player_id, "description": response.description})
-            self.game_message(f"{response.description}", player, exclude=True, sender=player.name)
+            self.round_animal_descriptions.append(
+                {"player_id": player.player_id, "description": response.description}
+            )
+            await self.game_message(
+                f"{response.description}", player, exclude=True, sender=player.name
+            )
             self.awaiting_input = False
         else:
             self.awaiting_input = True
 
         return response
 
-    def player_turn_chameleon_guess(self, chameleon: Player):
+    async def player_turn_chameleon_guess(self, chameleon: Player):
         """Handles the Chameleon's turn to guess the secret animal."""
         if not self.awaiting_input:
-            self.game_message("All players have spoken. The Chameleon will now guess the secret animal...")
-            self.verbose_message("The Chameleon is guessing...", recipient=chameleon, exclude=True)
+            await self.game_message(
+                "All players have spoken. The Chameleon will now guess the secret animal..."
+            )
+            self.verbose_message(
+                "The Chameleon is guessing...", recipient=chameleon, exclude=True
+            )
             player_responses = self.format_animal_descriptions(exclude=self.chameleon)
-            self.game_message(format_prompt("chameleon_guess_animal", player_responses=player_responses),
-                              self.chameleon)
+            await self.game_message(
+                format_prompt(
+                    "chameleon_guess_animal", player_responses=player_responses
+                ),
+                self.chameleon,
+            )
 
-        response = chameleon.controller.generate_formatted_response(ChameleonGuessFormat)
+        response = chameleon.controller.generate_formatted_response(
+            ChameleonGuessFormat
+        )
 
         if response:
             self.chameleon_guesses.append(response.animal)
-            self.game_message(
-                "The Chameleon has guessed the animal. Now the Herd will vote on who they think the chameleon is.")
+            await self.game_message(
+                "The Chameleon has guessed the animal. Now the Herd will vote on who they think the chameleon is."
+            )
             self.awaiting_input = False
             self.game_state = "herd_vote"
         else:
             # Await input and do not proceed to the next phase
             self.awaiting_input = True
 
-    def player_turn_herd_vote(self, player: Player):
+    async def player_turn_herd_vote(self, player: Player):
         """Handles a player's turn to vote for the Chameleon."""
         if not self.awaiting_input:
             player_responses = self.format_animal_descriptions(exclude=player)
-            self.game_message(format_prompt("vote", player_responses=player_responses), player)
+            await self.game_message(
+                format_prompt("vote", player_responses=player_responses), player
+            )
 
         # Get Player Vote
-        additional_fields = {"player_names": [p.name for p in self.players if p != player]}
-        response = player.controller.generate_formatted_response(HerdVoteFormat, additional_fields=additional_fields)
+        additional_fields = {
+            "player_names": [p.name for p in self.players if p != player]
+        }
+        response = player.controller.generate_formatted_response(
+            HerdVoteFormat, additional_fields=additional_fields
+        )
 
         if response:
-            self.debug_message(f"{player.name} voted for {response.vote}", recipient=player, exclude=True)
+            await self.debug_message(
+                f"{player.name} voted for {response.vote}",
+                recipient=player,
+                exclude=True,
+            )
 
             voted_for_player = self.player_from_name(response.vote)
 
-            player_vote = {"voter_id": player.player_id, "voted_for_id": voted_for_player.player_id}
+            player_vote = {
+                "voter_id": player.player_id,
+                "voted_for_id": voted_for_player.player_id,
+            }
 
             self.herd_vote_tally.append(player_vote)
             self.awaiting_input = False
@@ -292,26 +342,31 @@ class ChameleonGame(Game):
 
         return response
 
-    def resolve_round(self):
+    async def resolve_round(self):
         """Resolves the round, assigns points, and prints the results."""
-        self.game_message("All players have voted!")
+        await self.game_message("All players have voted!")
         for vote in self.herd_vote_tally:
             voter = self.player_from_id(vote["voter_id"])
             voted_for = self.player_from_id(vote["voted_for_id"])
-            self.game_message(f"{voter.name} voted for {voted_for.name}")
+            await self.game_message(f"{voter.name} voted for {voted_for.name}")
 
         accused_player_id = self.count_chameleon_votes(self.herd_vote_tally)
 
-        self.game_message(f"The round is over. Calculating results...")
-        self.game_message(
-            f"The Chameleon was {self.chameleon.name}, and they guessed the secret animal was {self.chameleon_guess}.")
-        self.game_message(f"The secret animal was actually was {self.herd_animal}.")
+        await self.game_message(f"The round is over. Calculating results...")
+        await self.game_message(
+            f"The Chameleon was {self.chameleon.name}, and they guessed the secret animal was {self.chameleon_guess}."
+        )
+        await self.game_message(
+            f"The secret animal was actually was {self.herd_animal}."
+        )
 
         if accused_player_id:
             accused_name = self.player_from_id(accused_player_id).name
-            self.game_message(f"The Herd voted for {accused_name} as the Chameleon.")
+            await self.game_message(
+                f"The Herd voted for {accused_name} as the Chameleon."
+            )
         else:
-            self.game_message(f"The Herd could not come to a consensus.")
+            await self.game_message(f"The Herd could not come to a consensus.")
 
         # Point Logic
         # If the Chameleon guesses the correct animal    =   +1 Point to the Chameleon
@@ -326,15 +381,17 @@ class ChameleonGame(Game):
         # If a Herd player votes for the Chameleon       =   +1 Point to that player
         for vote in self.herd_vote_tally:
             if vote["voted_for_id"] == self.chameleon.player_id:
-                self.player_from_id(vote['voter_id']).points += 1
+                self.player_from_id(vote["voter_id"]).points += 1
 
         # If the Herd fails to accuse the Chameleon      =   +1 Point to the Chameleon
         if not accused_player_id or accused_player_id != self.chameleon.player_id:
             self.chameleon.points += 1
 
         # Print Scores
-        player_points = "\n".join([f"{player.name}: {player.points}" for player in self.players])
-        self.game_message(f"Current Game Score:\n{player_points}")
+        player_points = "\n".join(
+            [f"{player.name}: {player.points}" for player in self.players]
+        )
+        await self.game_message(f"Current Game Score:\n{player_points}")
 
     def random_animal(self) -> str:
         """Returns a random animal from the list of available animals, and removes it from the list."""
@@ -345,7 +402,7 @@ class ChameleonGame(Game):
     @staticmethod
     def count_chameleon_votes(player_votes: list[dict]) -> str | None:
         """Counts the votes for each player."""
-        votes = [vote['voted_for_id'] for vote in player_votes]
+        votes = [vote["voted_for_id"] for vote in player_votes]
 
         freq = Counter(votes)
         most_voted_player, number_of_votes = freq.most_common()[0]

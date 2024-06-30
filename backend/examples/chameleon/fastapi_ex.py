@@ -7,9 +7,11 @@ from fastapi import FastAPI, WebSocket
 from fastapi.responses import HTMLResponse
 
 # Setup the Game
-from game_chameleon import ChameleonGame
+from backend.examples.chameleon.chameleon_game import ChameleonGame
 from hippodrome.controllers.human.base import BaseHumanController
+from hippodrome import Message
 
+from chameleon_player import ChameleonPlayer
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -29,21 +31,35 @@ async def get():
     return HTMLResponse(html)
 
 
+class FastAPIHumanController(BaseHumanController):
+    websocket = None
+
+    async def add_message(self, message: Message):
+        await self.websocket.send_json(
+            {"sender": message.sender, "content": message.content}
+        )
+
+    async def _generate(self) -> str:
+        player_message = await self.websocket.receive_json()
+        logger.info(f"Received data: {player_message}")
+
+        user_input = player_message["message"]["content"]
+        return user_input
+
+
+def setup_game(player_name: str):
+    """Set up the game."""
+
+    human_player = ChameleonPlayer(name=player_name, controller=FastAPIHumanController)
+
+    game = ChameleonGame.from_human_name(player_name, FastAPIHumanController)
+
+    return game
+
+
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
-
-    game = None
-    user_input = None
-
-    class FastAPIHumanController(BaseHumanController):
-        def _generate(self) -> str:
-            nonlocal user_input
-            response = user_input
-            user_input = None
-            return response
-
-    last_round_id = 0
 
     while True:
         player_message = await websocket.receive_json()
